@@ -2,7 +2,72 @@ import { h, Component } from 'preact'
 import { Link } from 'react-router-dom'
 
 class SignInPage extends Component {
-  render () {
+  state = {
+    username: '',
+    password: '',
+    error: null,
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const {
+      username,
+      password,
+    } = this.state
+
+    if (username.length === 0 || password.length === 0) {
+      this.setState({
+        error: 'Username and password are required',
+      });
+      return
+    }
+
+    if (username.length < 3) {
+      this.setState({
+        error: 'Username is too short',
+      });
+      return
+    }
+
+    if (password.length < 8) {
+      this.setState({
+        error: 'Password is too short',
+      });
+      return
+    }
+
+    Promise.resolve({})
+    // fetch('https://api.botmansachs.com/frontend_api/login', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     username,
+    //     password,
+    //   }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   }
+    // })
+      .then((res) => {
+        if (res.status >= 300) {
+          res.json()
+            .then(({ error }) => {
+              this.setState({
+                error,
+              })
+            })
+          return
+        }
+
+        history.push('/me')
+      })
+      .catch(console.error)
+  }
+
+  render ({}, {
+    username,
+    password,
+    error,
+  }) {
     const styleLabel = {
       fontSize: 18
     }
@@ -45,8 +110,14 @@ class SignInPage extends Component {
           </p>
           <input
             type="text"
-            maxLength={48}
+            maxLength={24}
+            value={username}
             style={styleInput}
+            onInput={({ target }) => {
+              this.setState({
+                username: target.value.replace(/[^\d\w]/g, '')
+              })
+            }}
           />
         </label>
 
@@ -57,7 +128,9 @@ class SignInPage extends Component {
           <input
             type="password"
             maxLength={64}
+            value={password}
             style={styleInput}
+            onInput={({ target }) => this.setState({ password: target.value })}
           />
         </label>
 
@@ -72,6 +145,10 @@ class SignInPage extends Component {
             value="Sign in"
           />
         </p>
+
+        {error && <p style={{ color: '#f33' }}>
+          {error}
+        </p>}
 
         <p>
           No account? <Link to="/signup">Sign up</Link>
