@@ -14,7 +14,7 @@ function specificBotController(req, res) {
         res.json(bot)
       }
     }
-  }).select({_id: 0, __v: 0}
+  }).select({_id: 0, __v: 0})
 }
 
 module.exports = specificBotController

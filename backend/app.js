@@ -1,4 +1,6 @@
 'use strict'
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
 const tradingApi = require('./src/trading-api')
 const frontendApi = require('./src/frontend-api')
 const mongoose = require('mongoose')
