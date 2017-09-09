@@ -61,6 +61,9 @@ const frontendApi = {
 
       app.use(session({
         secret: config.apiSecret,
+        cookie: {
+          maxAge: 24 * 60 * 60 * 1000,
+        },
         host: '127.0.0.1',
         db: 'session',
         url: `mongodb://${config.dbAddress}/${config.dbName}`,
