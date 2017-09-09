@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2'
 
 class UserPage extends Component {
   state = {
-    tab: 'stocks'
+    tab: 'stocks',
   }
 
   render ({}, { tab }) {
@@ -18,18 +18,30 @@ class UserPage extends Component {
         { 'timestamp': 1234453245, 'holdings': 11000 },
         { 'timestamp': 1234453255, 'holdings': 11500 },
         { 'timestamp': 1234453265, 'holdings': 11829 },
-        { 'timestamp': 1234453275, 'holdings': 13022 }
+        { 'timestamp': 1234453275, 'holdings': 13022 },
+        { 'timestamp': 1234453235, 'holdings': 12000 },
+        { 'timestamp': 1234453245, 'holdings': 11000 },
+        { 'timestamp': 1234453255, 'holdings': 11500 },
+        { 'timestamp': 1234453265, 'holdings': 11829 },
+        { 'timestamp': 1234453275, 'holdings': 13022 },
+        { 'timestamp': 1234453235, 'holdings': 12000 },
+        { 'timestamp': 1234453245, 'holdings': 11000 },
+        { 'timestamp': 1234453255, 'holdings': 11500 },
+        { 'timestamp': 1234453265, 'holdings': 11829 },
+        { 'timestamp': 1234453275, 'holdings': 13022 },
       ],
       'stocks': [
         {
           'symbol': 'AAPL',
           'name': 'Apple Inc.',
-          'shares': 200
+          'shares': 200,
+          'value': 1400,
         },
         {
           'symbol': 'MSFT',
           'name': 'Microsoft Corporation',
-          'shares': 125
+          'shares': 125,
+          'value': 400,
         }
       ]
     }
@@ -53,63 +65,59 @@ class UserPage extends Component {
       >
         <h1>{user.name}</h1>
 
-        <div
-          style={{
-            textAlign: 'center'
-          }}
-        >
-          <h2>Holdings</h2>
+        <div style={{ display: 'flex' }}>
           <div
             style={{
-              width: 96,
-              height: 96,
-              border: '4px solid #99c12a',
-              borderRadius: '50%',
-              color: '#99c12a',
-              margin: '4px auto',
-              fontWeight: 'bold',
-              fontSize: '24px',
-              lineHeight: '3.6'
+              flexGrow: 1,
+              textAlign: 'center'
             }}
           >
-            {user.holdings} $
+            <h2>Holdings</h2>
+            <div
+              style={{
+                width: 96,
+                height: 96,
+                border: '4px solid #99c12a',
+                borderRadius: '50%',
+                color: '#99c12a',
+                margin: '4px auto',
+                fontWeight: 'bold',
+                fontSize: '24px',
+                lineHeight: '3.6'
+              }}
+            >
+              {user.holdings} $
+            </div>
+            <div>
+              Cash <span style={{ color: '#99c12a' }}>{user.cash} $</span>
+            </div>
+            <div>
+              Stocks <span style={{ color: '#99c12a' }}>{user.holdings - user.cash} $</span>
+            </div>
           </div>
-          <div
-            style={{
-              fontWeight: 'bold'
-            }}
-          >
-            Cash <span style={{ color: '#99c12a' }}>{user.cash} $</span>
-          </div>
-          <div
-            style={{
-              fontWeight: 'bold'
-            }}
-          >
-            Stocks <span style={{ color: '#99c12a' }}>{user.holdings - user.cash} $</span>
-          </div>
-        </div>
 
-        <div
-          style={{
-            textAlign: 'center'
-          }}
-        >
-          <h2>Rank</h2>
           <div
             style={{
-              width: 96,
-              height: 96,
-              border: '4px solid #99c12a',
-              borderRadius: '50%',
-              color: '#99c12a',
-              margin: '4px auto',
-              fontWeight: 'bold',
-              fontSize: '24px',
-              lineHeight: '3.6'
+              flexGrow: 1,
+              textAlign: 'center'
             }}
           >
-            {user.rank}
+            <h2>Rank</h2>
+            <div
+              style={{
+                width: 96,
+                height: 96,
+                border: '4px solid #99c12a',
+                borderRadius: '50%',
+                color: '#99c12a',
+                margin: '4px auto',
+                fontWeight: 'bold',
+                fontSize: '24px',
+                lineHeight: '3.6'
+              }}
+            >
+              {user.rank}
+            </div>
           </div>
         </div>
 
@@ -127,7 +135,8 @@ class UserPage extends Component {
               borderBottom: 'none',
               ...(tab === 'stocks'
                 ? {
-                  color: 'red'
+                  color: '#3f6071',
+                  backgroundColor: 'rgba(255, 255, 255, 0.8)',
                 }
                 : {}
               )
@@ -146,7 +155,8 @@ class UserPage extends Component {
               borderLeft: 'none',
               ...(tab === 'history'
                 ? {
-                  color: 'red'
+                  color: '#3f6071',
+                  backgroundColor: 'rgba(255, 255, 255, 0.8)',
                 }
                 : {}
               )
@@ -166,9 +176,11 @@ class UserPage extends Component {
                   <div
                     key={stock.symbol + stock.shares}
                     style={{
+                      overflowX: 'scroll',
                       fontSize: 18,
                       padding: '6px 10px',
-                      borderBottom: '1px solid white'
+                      borderBottom: '1px solid white',
+                      whiteSpace: 'nowrap',
                     }}
                   >
                     <a
@@ -204,7 +216,7 @@ class UserPage extends Component {
                         fontWeight: 'bold'
                       }}
                     >
-                      {stock.value} $ per
+                      {stock.value} $
                     </span>}
                   </div>
                 ))}
@@ -212,18 +224,23 @@ class UserPage extends Component {
             )}
 
             {tab === 'history' && (
-              <div style={{ overflowX: 'scroll' }}>
+              <div style={{ overflowX: 'scroll', padding: 15 }}>
                 <Line
                   data={{
-                    labels: user.history.map((x) => x.timestamp),
+                    labels: user.history.map((x) =>
+                      new Date(x.timestamp * 1000)
+                        .toISOString()
+                        .split('T')[0]
+                    ),
                     datasets: [
                       {
                         label: 'Holdings',
-                        data: user.history.map((x) => x.holdings)
+                        data: user.history.map((x) => x.holdings),
+                        backgroundColor: 'rgba(153, 193, 42, 0.8)',
                       }
                     ]
                   }}
-                  width={user.history.length * 30}
+                  width={Math.max(Math.min(window.innerWidth, 768) - 30, user.history.length * 15)}
                   height={300}
                   options={{
                     responsive: false,
@@ -231,6 +248,18 @@ class UserPage extends Component {
                       labels: {
                         fontColor: 'white'
                       }
+                    },
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          fontColor: 'white',
+                        }
+                      }],
+                      xAxes: [{
+                        ticks: {
+                          fontColor: 'white',
+                        }
+                      }]
                     }
                   }}
                 />
