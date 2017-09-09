@@ -20,7 +20,7 @@ const botSchema = new mongoose.Schema({
   rank: { type: Number, default: Number.MAX_SAFE_INTEGER },
   cash: { type: Number, default: 1000000 },
   stocks: { type: [stockSchema], default: [] },
-  history: { type: [historySchema], default: [] },
+  history: { type: [historySchema], default: [] }
 })
 
 botSchema.methods.verifyPassword = function (password) {
