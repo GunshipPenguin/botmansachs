@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  webserver:
+    image: node:boron
+    ports:
+      - 80:80
+    working_dir: '/app'
+    volumes:
+      - './client:/app'
+    command: bash -c "npm install && npm start"
+
+  api:
+    image: node:boron
+    links:
+      - mongodb
+    ports:
+      - 8080:8080
+      - 8081:8081
+    working_dir: '/app'
+    volumes:
+      - './backend:/app'
+    command: bash -c "npm install && npm start"
+
+  mongodb:
+    image: mongo:3.4
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/db:/data/db
+    command: /bin/sh -c "mongod --smallfiles"
