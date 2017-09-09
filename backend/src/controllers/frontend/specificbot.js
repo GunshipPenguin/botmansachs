@@ -10,15 +10,17 @@ function specificBotController(req, res) {
     } else {
       if (bot == null) {
         res.status(404).json({error: 'Bot not found'})
-      } else {
+      } else if (bot.stocks.length > 0) {
         fillStockPrices(bot.stocks, stocks => {
           let objBot = bot.toObject()
           objBot.stocks = stocks
           res.json(objBot)
         })
+      } else {
+        res.json(bot)
       }
     }
-  }).select({_id: 0, __v: 0})
+  }).select({_id: 0, __v: 0, password: 0, source: 0})
 }
 
 function fillStockPrices(stocks, cb) {

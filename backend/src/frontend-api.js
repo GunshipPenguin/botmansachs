@@ -60,11 +60,11 @@ const frontendApi = {
       app.use(passport.session())
 
       app.use(session({
-        secret: 'foo',
+        secret: config.apiSecret,
         host: '127.0.0.1',
-        port: '27017',
         db: 'session',
         url: `mongodb://${config.dbAddress}/${config.dbName}`,
+        port: '27017',
       }))
 
       app.get('/frontend_api/bots/:bot', specificBotController)
