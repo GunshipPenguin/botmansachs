@@ -17,7 +17,7 @@ function registerController(req, res) {
     res.status(400).json({error: 'passwords must be at least 8 chars in length'})
   }
 
-  Bot.findOne({name: username}, (err, bot) => {
+  Bot.findOne({name: new RegExp('^' + username + '$', 'i')}, (err, bot) => {
     if (bot) {
       res.status(409).json({error: 'username already taken'})
       return
