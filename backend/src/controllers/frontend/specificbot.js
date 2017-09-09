@@ -3,9 +3,8 @@ const Bot = require('../../models/bot')
 const request = require('request')
 
 function specificBotController(req, res) {
-  let botName = req.params.name
-
-  Bot.findOne({name: botName}, (err, bot) => {
+  const botName = req.params.bot
+  Bot.findOne({ name: botName }, (err, bot) => {
     if (err) {
       res.status(500).send('Internal error while retreiving bot information')
     } else {
