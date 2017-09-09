@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 class NavigationBar extends Component {
   render () {
     const height = 60
-    const isLoggedIn = false
+    const isLoggedIn = true
     const styleItem = {
       margin: ' 0 4px',
       height: 48,

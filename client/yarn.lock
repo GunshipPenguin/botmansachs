@@ -2,168 +2,6 @@
 # yarn lockfile v1
 
 
-"@polymer/app-layout@^0.10.6-pre.1":
-  version "0.10.6-pre.1"
-  resolved "https://registry.yarnpkg.com/@polymer/app-layout/-/app-layout-0.10.6-pre.1.tgz#0375cb005dc942c9a10008a0edd47b7b1ff1f34c"
-  dependencies:
-    "@polymer/iron-flex-layout" gloo
-    "@polymer/iron-media-query" gloo
-    "@polymer/iron-resizable-behavior" gloo
-    "@polymer/iron-scroll-target-behavior" gloo
-    "@polymer/polymer" gloo
-
-"@polymer/font-roboto@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/font-roboto/-/font-roboto-0.0.3.tgz#9d58edb660bbed2d4bd29d3bf9b21c20bddd6187"
-
-"@polymer/iron-a11y-keys-behavior@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-a11y-keys-behavior/-/iron-a11y-keys-behavior-0.0.3.tgz#82a9c535d01ae94cb33d9c071a9a543ebc2044c0"
-  dependencies:
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-behaviors@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-behaviors/-/iron-behaviors-0.0.3.tgz#027484885ddb924f99fa8083dfba810e39d2671b"
-  dependencies:
-    "@polymer/iron-a11y-keys-behavior" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-checked-element-behavior@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-checked-element-behavior/-/iron-checked-element-behavior-0.0.3.tgz#1e78b6a76751495350d51d9caaaf6c0f7f74bd7a"
-  dependencies:
-    "@polymer/iron-form-element-behavior" "^0.0.3"
-    "@polymer/iron-validatable-behavior" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-flex-layout@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-flex-layout/-/iron-flex-layout-0.0.3.tgz#b7d7a732b1cbadfe6aa9500ca06f40d02578baf7"
-  dependencies:
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-flex-layout@gloo":
-  version "3.0.0-pre.1"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-flex-layout/-/iron-flex-layout-3.0.0-pre.1.tgz#46738316b52fe2858bf4fb207176366b1657457f"
-  dependencies:
-    "@polymer/polymer" "^3.0.0-pre.1"
-
-"@polymer/iron-form-element-behavior@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-form-element-behavior/-/iron-form-element-behavior-0.0.3.tgz#3564a2a51d8ccfdda4193d943d5fd0c12c463759"
-  dependencies:
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-icon@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-icon/-/iron-icon-0.0.3.tgz#e1b14afed4ad1106ed867d64ef01fe43f9b4e5e7"
-  dependencies:
-    "@polymer/iron-flex-layout" "^0.0.3"
-    "@polymer/iron-meta" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-icons@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-icons/-/iron-icons-0.0.3.tgz#d672ab979bdcd4ded8027e8de23e8c51d0c7f4c6"
-  dependencies:
-    "@polymer/iron-icon" "^0.0.3"
-    "@polymer/iron-iconset-svg" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-iconset-svg@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-iconset-svg/-/iron-iconset-svg-0.0.3.tgz#cd4cff5233f8061e3e0d34a65180b9a92085860a"
-  dependencies:
-    "@polymer/iron-meta" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-media-query@gloo":
-  version "3.0.0-pre.1"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-media-query/-/iron-media-query-3.0.0-pre.1.tgz#5738c8d741574bd71eb740d2f9f073062d4a8510"
-  dependencies:
-    "@polymer/polymer" "^3.0.0-pre.1"
-
-"@polymer/iron-meta@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-meta/-/iron-meta-0.0.3.tgz#a4cec8479bdaec66ff03749a59136f21fde01d70"
-  dependencies:
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/iron-resizable-behavior@gloo":
-  version "3.0.0-pre.1"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-resizable-behavior/-/iron-resizable-behavior-3.0.0-pre.1.tgz#1a6c0276329fdb41818c5e1356f9a8089cf3fbdb"
-  dependencies:
-    "@polymer/polymer" "^3.0.0-pre.1"
-
-"@polymer/iron-scroll-target-behavior@gloo":
-  version "3.0.0-pre.1"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-scroll-target-behavior/-/iron-scroll-target-behavior-3.0.0-pre.1.tgz#39f5754efdf7083fb82c295a3c94a30e57fbbacf"
-  dependencies:
-    "@polymer/polymer" "^3.0.0-pre.1"
-
-"@polymer/iron-validatable-behavior@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-validatable-behavior/-/iron-validatable-behavior-0.0.3.tgz#438747173d2b1d3bc1a08458a55ed31c9b4f192f"
-  dependencies:
-    "@polymer/iron-meta" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/paper-behaviors@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/paper-behaviors/-/paper-behaviors-0.0.3.tgz#79a39b1dc62c067a179efa70c4f34e1fb8de9a6f"
-  dependencies:
-    "@polymer/iron-behaviors" "^0.0.3"
-    "@polymer/iron-checked-element-behavior" "^0.0.3"
-    "@polymer/paper-ripple" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/paper-icon-button@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/paper-icon-button/-/paper-icon-button-0.0.3.tgz#446909a67334c3e8c6d9f0f4711ad82b4fa32fb4"
-  dependencies:
-    "@polymer/iron-flex-layout" "^0.0.3"
-    "@polymer/iron-icon" "^0.0.3"
-    "@polymer/iron-icons" "^0.0.3"
-    "@polymer/paper-behaviors" "^0.0.3"
-    "@polymer/paper-ripple" "^0.0.3"
-    "@polymer/paper-styles" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/paper-ripple@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/paper-ripple/-/paper-ripple-0.0.3.tgz#2b722947a852825233967606cd5fcf590eb7d829"
-  dependencies:
-    "@polymer/iron-a11y-keys-behavior" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/paper-styles@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@polymer/paper-styles/-/paper-styles-0.0.3.tgz#b8466a047807d6fc63c24fa71b486c975cc75379"
-  dependencies:
-    "@polymer/font-roboto" "^0.0.3"
-    "@polymer/iron-flex-layout" "^0.0.3"
-    "@polymer/polymer" "^1.2.5-npm-test.2"
-
-"@polymer/polymer@^1.2.5-npm-test.2":
-  version "1.2.5-npm-test.2"
-  resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-1.2.5-npm-test.2.tgz#7930f5663c2f686915451d211e663aa9997d7336"
-  dependencies:
-    webcomponents.js "^0.7.20"
-
-"@polymer/polymer@^3.0.0-pre.1":
-  version "3.0.0-pre.1"
-  resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.0.0-pre.1.tgz#9fc26b5259aad9265f324ced02de715991d2eabe"
-  dependencies:
-    "@webcomponents/shadycss" "^1.0.0"
-    "@webcomponents/webcomponentsjs" "^1.0.0"
-
-"@polymer/polymer@gloo":
-  version "1.7.1-npm-test.4"
-  resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-1.7.1-npm-test.4.tgz#ef0f09795d39fd03a81e1b9ca89f8855307d9fea"
-  dependencies:
-    webcomponents.js "^0.7.20"
-
 "@types/configstore@^2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@types/configstore/-/configstore-2.1.1.tgz#cd1e8553633ad3185c3f2f239ecff5d2643e92b6"
@@ -202,14 +40,6 @@
 "@types/tmp@^0.0.32":
   version "0.0.32"
   resolved "https://registry.yarnpkg.com/@types/tmp/-/tmp-0.0.32.tgz#0d3cb31022f8427ea58c008af32b80da126ca4e3"
-
-"@webcomponents/shadycss@^1.0.0":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@webcomponents/shadycss/-/shadycss-1.0.5.tgz#ff8537dd06c46f33eccee082cdecd9507bf39f56"
-
-"@webcomponents/webcomponentsjs@^1.0.0", "@webcomponents/webcomponentsjs@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@webcomponents/webcomponentsjs/-/webcomponentsjs-1.0.10.tgz#990da9820a89931c8df285871ec943bf99d4a747"
 
 "@webpack-blocks/core@^0.4.0":
   version "0.4.0"
@@ -1569,6 +1399,26 @@ chalk@^2.0.0, chalk@^2.1.0:
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
 
+chart.js@^2.5.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.6.0.tgz#308f9a4b0bfed5a154c14f5deb1d9470d22abe71"
+  dependencies:
+    chartjs-color "^2.1.0"
+    moment "^2.10.6"
+
+chartjs-color-string@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/chartjs-color-string/-/chartjs-color-string-0.4.0.tgz#57748d4530ae28d8db0a5492182ba06dfdf2f468"
+  dependencies:
+    color-name "^1.0.0"
+
+chartjs-color@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/chartjs-color/-/chartjs-color-2.1.0.tgz#9c39ac830ccd98996ae80c9f11086ff12c98a756"
+  dependencies:
+    chartjs-color-string "^0.4.0"
+    color-convert "^0.5.3"
+
 chokidar@^1.6.0, chokidar@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
@@ -1674,6 +1524,10 @@ coa@~1.0.1:
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
+
+color-convert@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-0.5.3.tgz#bdb6c69ce660fadffe0b0007cc447e1b9f7282bd"
 
 color-convert@^1.3.0, color-convert@^1.9.0:
   version "1.9.0"
@@ -4532,6 +4386,10 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
+moment@^2.10.6:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -5634,6 +5492,13 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-chartjs-2@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/react-chartjs-2/-/react-chartjs-2-2.6.2.tgz#3631b5f79dce494ea1ea87f011389a540782223b"
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.5.8"
 
 react-router-dom@^4.2.2:
   version "4.2.2"
@@ -6985,10 +6850,6 @@ wbuf@^1.1.0, wbuf@^1.7.2:
   resolved "https://registry.yarnpkg.com/wbuf/-/wbuf-1.7.2.tgz#d697b99f1f59512df2751be42769c1580b5801fe"
   dependencies:
     minimalistic-assert "^1.0.0"
-
-webcomponents.js@^0.7.20:
-  version "0.7.24"
-  resolved "https://registry.yarnpkg.com/webcomponents.js/-/webcomponents.js-0.7.24.tgz#2116fbfa1468ec416a7befdaa333e1d118f69c04"
 
 webpack-chunk-hash@^0.4.0:
   version "0.4.0"
