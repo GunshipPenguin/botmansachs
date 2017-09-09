@@ -1,0 +1,38 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "Botman Sachs Backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test",
+    "lint": "eslint .",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GunshipPenguin/botmansachs.git"
+  },
+  "keywords": [
+    "trading",
+    "stocks",
+    "finance"
+  ],
+  "author": "Rhys Rustad-Elliott,Omar Chehab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GunshipPenguin/botmansachs/issues"
+  },
+  "homepage": "https://github.com/GunshipPenguin/botmansachs#readme",
+  "devDependencies": {
+    "eslint": "^4.6.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "request": "^2.81.0"
+  }
+}
