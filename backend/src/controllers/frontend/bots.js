@@ -28,7 +28,6 @@ function botsController(req, res) {
 
   Bot.find(query, (err, bots) => {
    if (err) {
-     console.log(err)
      res.status(500).send('Internal error while retreiving bot information')
    } else {
      const resData = {bots: bots}
