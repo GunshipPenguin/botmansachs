@@ -33,7 +33,7 @@ function botsController(req, res) {
      const resData = {bots: bots}
      res.json(resData)
    }
- }).sort(sortParams).limit(limit)
+ }).sort(sortParams).limit(limit).select({_id: 0, __v: 0})
 }
 
 module.exports = botsController
