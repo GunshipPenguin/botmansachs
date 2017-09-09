@@ -1,10 +1,11 @@
 import { h, Component } from 'preact'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class NavigationBar extends Component {
-  render () {
+  render ({ username }) {
     const height = 60
-    const isLoggedIn = true
+    const isLoggedIn = !!username
     const styleItem = {
       margin: ' 0 4px',
       height: 48,
@@ -87,13 +88,13 @@ class NavigationBar extends Component {
                 />
               </Link>}
 
-              {isLoggedIn && <Link to="/signout">
+              {/* {isLoggedIn && <Link to="/signout">
                 <img
                   src="/assets/graphics/ic_logout_white_48px.svg"
                   alt="Sign out"
                   style={styleItem}
                 />
-              </Link>}
+              </Link>} */}
             </div>
           </div>
         </div>
@@ -102,4 +103,6 @@ class NavigationBar extends Component {
   }
 }
 
-export default NavigationBar
+export default connect(
+  (state) => ({ username: state.username })
+)(NavigationBar)

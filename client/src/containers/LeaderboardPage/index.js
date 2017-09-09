@@ -130,7 +130,7 @@ class LeaderboardPage extends Component {
                   fontWeight: 'bold'
                 }}
               >
-                {user.rank !== Number.MAX_SAFE_INTEGER ? user.rank + '.' : '∅'}
+                {bot.rank !== Number.MAX_SAFE_INTEGER ? bot.rank + '.' : '∅'}
               </span>
               &nbsp;
               <span>

@@ -77,7 +77,7 @@ class SignUpPage extends Component {
           return
         }
 
-        history.push('/me')
+        history.push('/signin')
       })
       .catch(console.error)
   }

@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Line } from 'react-chartjs-2'
 
@@ -10,7 +11,7 @@ class UserPage extends Component {
 
   componentDidMount() {
     this.fetchBot()
-    setInterval(this.fetchBot, 1000)
+    setInterval(this.fetchBot, 5000)
   }
 
   fetchBot = () => {
@@ -18,7 +19,7 @@ class UserPage extends Component {
       match,
     } = this.props
     const username = match.path === '/me'
-      ? 'TODO'
+      ? this.props.username
       : match.params.username
     Promise.resolve({
       'rank': Math.round(Math.random() * 50),
@@ -297,4 +298,13 @@ class UserPage extends Component {
   }
 }
 
-export default withRouter(UserPage)
+export default withRouter(
+  connect(
+    (state) => ({
+      username: state.username,
+    }),
+    (dispatch) => ({
+      dispatch,
+    })
+  )(UserPage)
+)

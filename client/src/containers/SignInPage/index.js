@@ -1,5 +1,6 @@
 import { h, Component } from 'preact'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
 
 class SignInPage extends Component {
   state = {
@@ -10,6 +11,10 @@ class SignInPage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    const {
+      dispatch,
+      history,
+    } = this.props
     const {
       username,
       password,
@@ -58,6 +63,10 @@ class SignInPage extends Component {
           return
         }
 
+        dispatch({
+          type: 'LOGIN',
+          username,
+        })
         history.push('/me')
       })
       .catch(console.error)
@@ -90,6 +99,7 @@ class SignInPage extends Component {
     }
     return (
       <form
+        onSubmit={this.handleSubmit}
         style={{
           margin: 'auto',
           maxWidth: 512,
@@ -158,4 +168,9 @@ class SignInPage extends Component {
   }
 }
 
-export default SignInPage
+export default withRouter(
+  connect(
+    undefined,
+    (dispatch) => ({ dispatch })
+  )(SignInPage)
+)
