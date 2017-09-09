@@ -6,8 +6,6 @@ class NavigationBar extends Component {
     const height = 60
     const isLoggedIn = false
     const styleItem = {
-      borderRadius: '50%',
-      border:' 1px solid #fff',
       margin:' 0 4px',
       height: 48,
       padding: 4,
