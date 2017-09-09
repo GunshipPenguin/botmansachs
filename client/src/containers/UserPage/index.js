@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Line } from 'react-chartjs-2'
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 class UserPage extends Component {
   state = {
     tab: 'stocks',
@@ -10,6 +14,16 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
+    const {
+      history,
+      username,
+      match,
+    } = this.props
+    if (match.url === '/me' && !username) {
+      history.push('/signin')
+      return
+    }
+
     this.fetchBot()
     this.interval = setInterval(this.fetchBot, 5000)
   }
@@ -118,13 +132,13 @@ class UserPage extends Component {
                 lineHeight: 5.8,
               }}
             >
-              {holdings} $
+              {numberWithCommas(holdings)} $
             </div>
             <div>
-              Cash <span style={{ color: '#99c12a' }}>{user.cash} $</span>
+              Cash <span style={{ color: '#99c12a' }}>{numberWithCommas(user.cash)} $</span>
             </div>
             <div>
-              Stocks <span style={{ color: '#99c12a' }}>{holdings - user.cash} $</span>
+              Stocks <span style={{ color: '#99c12a' }}>{numberWithCommas(holdings - user.cash)} $</span>
             </div>
           </div>
 
@@ -148,7 +162,7 @@ class UserPage extends Component {
                 lineHeight: 5.8,
               }}
             >
-              {user.rank !== Number.MAX_SAFE_INTEGER ? user.rank : '∅'}
+              {user.rank !== Number.MAX_SAFE_INTEGER ? numberWithCommas(user.rank) : '∅'}
             </div>
           </div>
         </div>
@@ -204,7 +218,7 @@ class UserPage extends Component {
           >
             {tab === 'stocks' && (
               <div>
-                {user.stocks.length === 0 && <p styles={{ padding: '0 15px' }}>
+                {user.stocks.length === 0 && <p style={{ padding: '0 15px' }}>
                   No stocks.
                 </p>}
                 {user.stocks.map((stock) => (
@@ -242,7 +256,7 @@ class UserPage extends Component {
                         fontWeight: 'bold'
                       }}
                     >
-                      {stock.shares} shares
+                      {numberWithCommas(stock.shares)} shares
                     </span>
                     &nbsp;
                     {stock.value && <span
@@ -251,7 +265,7 @@ class UserPage extends Component {
                         fontWeight: 'bold'
                       }}
                     >
-                      {stock.value} $
+                      {numberWithCommas(stock.value)} $
                     </span>}
                   </div>
                 ))}

@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 
 class SignUpPage extends Component {
@@ -7,6 +8,16 @@ class SignUpPage extends Component {
     password: '',
     confirmPassword: '',
     error: null,
+  }
+
+  componentDidMount() {
+    const {
+      username,
+      history,
+    } = this.props
+    if (username) {
+      history.push('/me')
+    }
   }
 
   handleSubmit = (event) => {
@@ -191,4 +202,8 @@ class SignUpPage extends Component {
   }
 }
 
-export default withRouter(SignUpPage)
+export default withRouter(
+  connect(
+    (state) => ({ username: state.username })
+  )(SignUpPage)
+)

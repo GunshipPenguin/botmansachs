@@ -1,5 +1,9 @@
 import { h, Component } from 'preact'
 
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 class LeaderboardPage extends Component {
   state = {
     bots: null,
@@ -14,7 +18,7 @@ class LeaderboardPage extends Component {
     if (flush) {
       this.setState({ bots })
     }
-    const searchQuery = search ? '&searchterm=' + search : ''
+    const searchQuery = search ? '&search_term=' + search : ''
     // Promise.resolve({ bots: [
     //     {
     //       'name': 'pennbot',
@@ -109,45 +113,49 @@ class LeaderboardPage extends Component {
             borderBottom: 'none'
           }}
         >
-          {bots.map((bot) => (
-            <div
-              key={bot.rank + bot.name + bot.holdings}
-              style={{
-                fontSize: 18,
-                padding: '6px 10px',
-                borderBottom: '1px solid white'
-              }}
-            >
-              <span
+          {bots.map((bot) => {
+            const holdings = bot.cash + bot.stocks
+              .reduce((result, stock) => result + stock.quantity * stock.price, 0)
+            return (
+              <div
+                key={bot.rank + bot.name + holdings}
                 style={{
-                  color: bot.rank === 1
-                    ? '#e6c200'
-                    : bot.rank === 2
-                      ? '#b3b3b3'
-                      : bot.rank === 3
-                        ? '#cd7f32'
-                        : undefined,
-                  fontWeight: 'bold'
+                  fontSize: 18,
+                  padding: '6px 10px',
+                  borderBottom: '1px solid white'
                 }}
               >
-                {bot.rank !== Number.MAX_SAFE_INTEGER ? bot.rank + '.' : '∅'}
-              </span>
-              &nbsp;
-              <span>
-                {bot.name}
-              </span>
-              &nbsp;
-              <span
-                style={{
-                  float: 'right',
-                  color: '#99c12a',
-                  fontWeight: 'bold'
-                }}
-              >
-                {bot.holdings} $
-              </span>
-            </div>
-          ))}
+                <span
+                  style={{
+                    color: bot.rank === 1
+                      ? '#e6c200'
+                      : bot.rank === 2
+                        ? '#b3b3b3'
+                        : bot.rank === 3
+                          ? '#cd7f32'
+                          : undefined,
+                    fontWeight: 'bold'
+                  }}
+                >
+                  {bot.rank !== Number.MAX_SAFE_INTEGER ? numberWithCommas(bot.rank) + '.' : '∅'}
+                </span>
+                &nbsp;
+                <span>
+                  {bot.name}
+                </span>
+                &nbsp;
+                <span
+                  style={{
+                    float: 'right',
+                    color: '#99c12a',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  {numberWithCommas(holdings)} $
+                </span>
+              </div>
+            )}
+          )}
         </div>
       </div>
     )
