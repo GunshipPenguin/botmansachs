@@ -15,31 +15,31 @@ class LeaderboardPage extends Component {
       this.setState({ bots })
     }
     const searchQuery = search ? '&searchterm=' + search : ''
-    Promise.resolve({ bots: [
-        {
-          'name': 'pennbot',
-          'rank': 1,
-          'holdings': 15212
-        },
-        {
-          'name': 'traderbot6',
-          'rank': 2,
-          'holdings': 12444
-        },
-        {
-          'name': 'asdfbot',
-          'rank': 3,
-          'holdings': 2222
-        },
-        {
-          'name': 'brickbreaker',
-          'rank': 4,
-          'holdings': 1111
-        }
-      ].filter(x => !search || x.name.match(search))
-    })
-    // fetch(`https://api.botmansachs.com/frontend_api/bots?after=0&limit=200${searchQuery}`)
-      // .then((res) => res.json())
+    // Promise.resolve({ bots: [
+    //     {
+    //       'name': 'pennbot',
+    //       'rank': 1,
+    //       'holdings': 15212
+    //     },
+    //     {
+    //       'name': 'traderbot6',
+    //       'rank': 2,
+    //       'holdings': 12444
+    //     },
+    //     {
+    //       'name': 'asdfbot',
+    //       'rank': 3,
+    //       'holdings': 2222
+    //     },
+    //     {
+    //       'name': 'brickbreaker',
+    //       'rank': 4,
+    //       'holdings': 1111
+    //     }
+    //   ].filter(x => !search || x.name.match(search))
+    // })
+    fetch(`http://localhost:8081/frontend_api/bots?after=0&limit=200${searchQuery}`)
+      .then((res) => res.json())
       .then(({ bots }) => {
         this.setState({ bots })
       })

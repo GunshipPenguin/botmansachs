@@ -41,17 +41,17 @@ class SignInPage extends Component {
       return
     }
 
-    Promise.resolve({})
-    // fetch('https://api.botmansachs.com/frontend_api/login', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     username,
-    //     password,
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   }
-    // })
+    // Promise.resolve({})
+    fetch('http://localhost:8081/frontend_api/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
       .then((res) => {
         if (res.status >= 300) {
           res.json()

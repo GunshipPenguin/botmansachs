@@ -21,45 +21,45 @@ class UserPage extends Component {
     const username = match.path === '/me'
       ? this.props.username
       : match.params.username
-    Promise.resolve({
-      'rank': Math.round(Math.random() * 50),
-      'name': username,
-      'holdings': Math.round(Math.random() * 100000) + 10000,
-      'cash': 10000,
-      'history': [
-        { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-        { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
-      ],
-      'stocks': [
-        {
-          'symbol': 'AAPL',
-          'name': 'Apple Inc.',
-          'shares': Math.round(Math.random() * 100),
-          'value': 1400,
-        },
-        {
-          'symbol': 'MSFT',
-          'name': 'Microsoft Corporation',
-          'shares': Math.round(Math.random() * 125),
-          'value': 400,
-        }
-      ]
-    })
-    // fetch(`https://api.botmansachs.com/frontend_api/bots/${username}`)
-      // .then((res) => res.json())
+    // Promise.resolve({
+    //   'rank': Math.round(Math.random() * 50),
+    //   'name': username,
+    //   'holdings': Math.round(Math.random() * 100000) + 10000,
+    //   'cash': 10000,
+    //   'history': [
+    //     { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //     { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+    //   ],
+    //   'stocks': [
+    //     {
+    //       'symbol': 'AAPL',
+    //       'name': 'Apple Inc.',
+    //       'shares': Math.round(Math.random() * 100),
+    //       'value': 1400,
+    //     },
+    //     {
+    //       'symbol': 'MSFT',
+    //       'name': 'Microsoft Corporation',
+    //       'shares': Math.round(Math.random() * 125),
+    //       'value': 400,
+    //     }
+    //   ]
+    // })
+    fetch(`http://localhost:8081/frontend_api/bots/${username}`)
+      .then((res) => res.json())
       .then((user) => {
         this.setState({ user })
       })

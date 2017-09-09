@@ -27,9 +27,9 @@ class BotEditorPage extends Component {
       }
     })
 
-    Promise.resolve({ source: '' })
-    // fetch('https://api.botmansachs.com/frontend_api/mybot')
-      // .then((res) => res.json())
+    // Promise.resolve({ source: '' })
+    fetch('http://localhost:8081/frontend_api/mybot')
+      .then((res) => res.json())
       .then((bot) => {
         const source = bot.source ||
           'import botmansachs\n\n# Insert your trading code here ⚡\n'
@@ -83,16 +83,16 @@ class BotEditorPage extends Component {
       source,
     } = this.state;
 
-    Promise.resolve({})
-    // fetch('https://api.botmansachs.com/frontend_api/mybot', {
-    //   method: 'PATCH',
-    //   body: JSON.stringify({
-    //     source,
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   }
-    // })
+    // Promise.resolve({})
+    fetch('http://localhost:8081/frontend_api/mybot', {
+      method: 'PATCH',
+      body: JSON.stringify({
+        source,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
       .then(() => this.setState({ lastSaved: new Date() }))
       .catch(console.error)
   }
@@ -109,16 +109,16 @@ class BotEditorPage extends Component {
       source,
     } = this.state;
 
-    Promise.resolve({})
-    // fetch('https://api.botmansachs.com/frontend_api/mybot', {
-    //   method: 'PATCH',
-    //   body: JSON.stringify({
-    //     source,
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   }
-    // })
+    // Promise.resolve({})
+    fetch('http://localhost:8081/frontend_api/mybot', {
+      method: 'PATCH',
+      body: JSON.stringify({
+        source,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
       .then(() => history.push('/me'))
       .catch(console.error)
   }
