@@ -3,23 +3,24 @@ const Bot = require('../../models/bot')
 const request = require('request')
 
 function specificBotController(req, res) {
-  let botName = req.params.name
-
-  Bot.findOne({name: botName}, (err, bot) => {
+  const botName = req.params.bot
+  Bot.findOne({ name: botName }, (err, bot) => {
     if (err) {
       res.status(500).send('Internal error while retreiving bot information')
     } else {
       if (bot == null) {
         res.status(404).json({error: 'Bot not found'})
-      } else {
+      } else if (bot.stocks.length > 0) {
         fillStockPrices(bot.stocks, stocks => {
           let objBot = bot.toObject()
           objBot.stocks = stocks
           res.json(objBot)
         })
+      } else {
+        res.json(bot)
       }
     }
-  }).select({_id: 0, __v: 0})
+  }).select({_id: 0, __v: 0, password: 0, source: 0})
 }
 
 function fillStockPrices(stocks, cb) {

@@ -9,6 +9,16 @@ class SignInPage extends Component {
     error: null,
   }
 
+  componentDidMount() {
+    const {
+      username,
+      history,
+    } = this.props
+    if (username) {
+      history.push('/me')
+    }
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     const {
@@ -170,7 +180,7 @@ class SignInPage extends Component {
 
 export default withRouter(
   connect(
-    undefined,
+    (state) => ({ username: state.username }),
     (dispatch) => ({ dispatch })
   )(SignInPage)
 )

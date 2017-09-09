@@ -8,13 +8,19 @@ const stockSchema = new mongoose.Schema({
   quantity: Number,
 }, {_id: false})
 
+const historySchema = new mongoose.Schema({
+  timestamp: Number,
+  holdings: Number,
+}, {_id: false})
+
 const botSchema = new mongoose.Schema({
   name: String,
   password: String,
-  source: {type: String, default: ''},
-  rank: {type: Number, default: Infinity},
-  cash: {type: Number, default: 1000000},
-  stocks: {type: [stockSchema], default: []}
+  source: { type: String, default: '' },
+  rank: { type: Number, default: Number.MAX_SAFE_INTEGER },
+  cash: { type: Number, default: 1000000 },
+  stocks: { type: [stockSchema], default: [] },
+  history: { type: [historySchema], default: [] },
 })
 
 botSchema.methods.verifyPassword = function (password) {

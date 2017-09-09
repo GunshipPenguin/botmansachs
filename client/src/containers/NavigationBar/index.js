@@ -26,7 +26,8 @@ class NavigationBar extends Component {
             height,
             backgroundColor: '#183440',
             padding: 7,
-            boxShadow: '1px 1px 2px #333'
+            boxShadow: '1px 1px 2px #333',
+            zIndex: 8,
           }}
         >
           <div
@@ -60,6 +61,7 @@ class NavigationBar extends Component {
                 <img
                   src="/assets/graphics/ic_star_rate_white_48px.svg"
                   alt="Leaderboard"
+                  title="Leaderboard"
                   style={styleItem}
                 />
               </Link>
@@ -68,6 +70,16 @@ class NavigationBar extends Component {
                 <img
                   src="/assets/graphics/ic_person_add_white_48px.svg"
                   alt="Sign Up"
+                  title="Sign Up"
+                  style={styleItem}
+                />
+              </Link>}
+
+              {!isLoggedIn && <Link to="/signin">
+                <img
+                  src="/assets/graphics/ic_person_white_48px.svg"
+                  alt="Sign In"
+                  title="Sign In"
                   style={styleItem}
                 />
               </Link>}
@@ -76,6 +88,7 @@ class NavigationBar extends Component {
                 <img
                   src="/assets/graphics/ic_person_white_48px.svg"
                   alt="My Profile"
+                  title="My Profile"
                   style={styleItem}
                 />
               </Link>}
@@ -84,6 +97,7 @@ class NavigationBar extends Component {
                 <img
                   src="/assets/graphics/ic_edit_white_48px.svg"
                   alt="Edit My Bot"
+                  title="Edit My Bot"
                   style={styleItem}
                 />
               </Link>}
@@ -92,6 +106,7 @@ class NavigationBar extends Component {
                 <img
                   src="/assets/graphics/ic_logout_white_48px.svg"
                   alt="Sign out"
+                  title="Sign out"
                   style={styleItem}
                 />
               </Link>} */}

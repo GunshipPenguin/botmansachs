@@ -1,31 +1,32 @@
 'use strict'
+const passport = require('passport')
 
-function loginController(req, res) {
+function loginController(req, res, next) {
   // Is logged in
   if (req.session && req.session.user) {
-     res.status(400).json({error: 'already logged in'})
+     res.status(400).json({error: 'Already logged in'})
      return
    }
 
    if (!req.body) {
-     res.status(400).json({error: 'username or password invalid'})
+     res.status(400).json({error: 'Invalid request'})
      return
    }
 
-   if (req.body['username'] === undefined || req.body['password'] === undefined) {
-     res.status(400).json({error: 'username or password undefined'})
+   if (!req.body['username'] || !req.body['password']) {
+     res.status(400).json({error: 'Username and password are required'})
      return
    }
 
    passport.authenticate('local', function (err, user, info) {
      if (err) {
-       res.status(500).json({error: 'internal server error'})
+       res.status(500).json({error: 'Internal server error'})
        return next(err)
      }
 
      // Invalid credentials
      if (user === false) {
-       res.status(400).json({error: 'invalid login credentials'})
+       res.status(400).json({error: info.message })
        return
      }
 

@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Line } from 'react-chartjs-2'
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 class UserPage extends Component {
   state = {
     tab: 'stocks',
@@ -10,8 +14,22 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
+    const {
+      history,
+      username,
+      match,
+    } = this.props
+    if (match.url === '/me' && !username) {
+      history.push('/signin')
+      return
+    }
+
     this.fetchBot()
-    setInterval(this.fetchBot, 5000)
+    this.interval = setInterval(this.fetchBot, 5000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   fetchBot = () => {
@@ -24,7 +42,6 @@ class UserPage extends Component {
     // Promise.resolve({
     //   'rank': Math.round(Math.random() * 50),
     //   'name': username,
-    //   'holdings': Math.round(Math.random() * 100000) + 10000,
     //   'cash': 10000,
     //   'history': [
     //     { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
@@ -71,6 +88,9 @@ class UserPage extends Component {
     if (!user) {
       return
     }
+    // cash + total value of stocks
+    const holdings = user.cash + user.stocks
+      .reduce((result, stock) => result + stock.quantity * stock.price, 0)
     const styleButton = {
       backgroundColor: 'transparent',
       display: 'inline-block',
@@ -101,24 +121,24 @@ class UserPage extends Component {
             <h2>Holdings</h2>
             <div
               style={{
-                width: 96,
-                height: 96,
+                width: 144,
+                height: 144,
                 border: '4px solid #99c12a',
                 borderRadius: '50%',
                 color: '#99c12a',
                 margin: '4px auto',
                 fontWeight: 'bold',
                 fontSize: '24px',
-                lineHeight: '3.6'
+                lineHeight: 5.8,
               }}
             >
-              {user.holdings} $
+              {numberWithCommas(holdings)} $
             </div>
             <div>
-              Cash <span style={{ color: '#99c12a' }}>{user.cash} $</span>
+              Cash <span style={{ color: '#99c12a' }}>{numberWithCommas(user.cash)} $</span>
             </div>
             <div>
-              Stocks <span style={{ color: '#99c12a' }}>{user.holdings - user.cash} $</span>
+              Stocks <span style={{ color: '#99c12a' }}>{numberWithCommas(holdings - user.cash)} $</span>
             </div>
           </div>
 
@@ -131,18 +151,18 @@ class UserPage extends Component {
             <h2>Rank</h2>
             <div
               style={{
-                width: 96,
-                height: 96,
+                width: 144,
+                height: 144,
                 border: '4px solid #99c12a',
                 borderRadius: '50%',
                 color: '#99c12a',
                 margin: '4px auto',
                 fontWeight: 'bold',
                 fontSize: '24px',
-                lineHeight: '3.6'
+                lineHeight: 5.8,
               }}
             >
-              {user.rank !== Number.MAX_SAFE_INTEGER ? user.rank : '∅'}
+              {user.rank !== Number.MAX_SAFE_INTEGER ? numberWithCommas(user.rank) : '∅'}
             </div>
           </div>
         </div>
@@ -198,6 +218,9 @@ class UserPage extends Component {
           >
             {tab === 'stocks' && (
               <div>
+                {user.stocks.length === 0 && <p style={{ padding: '0 15px' }}>
+                  No stocks.
+                </p>}
                 {user.stocks.map((stock) => (
                   <div
                     key={stock.symbol + stock.shares}
@@ -233,7 +256,7 @@ class UserPage extends Component {
                         fontWeight: 'bold'
                       }}
                     >
-                      {stock.shares} shares
+                      {numberWithCommas(stock.shares)} shares
                     </span>
                     &nbsp;
                     {stock.value && <span
@@ -242,7 +265,7 @@ class UserPage extends Component {
                         fontWeight: 'bold'
                       }}
                     >
-                      {stock.value} $
+                      {numberWithCommas(stock.value)} $
                     </span>}
                   </div>
                 ))}

@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import CodeMirror from 'react-codemirror'
 import 'codemirror/lib/codemirror.css'
@@ -12,27 +13,25 @@ class BotEditorPage extends Component {
   }
 
   componentDidMount() {
-    this.editor.codeMirror.on('beforeChange', (cm, change) => {
-      const {
-        source,
-      } = this.state
+    const {
+      history,
+      username,
+    } = this.props
 
-      if (source === null) {
-        return
-      }
-
-      const readOnlyLines = [ 0 ];
-      if (~readOnlyLines.indexOf(change.from.line)) {
-        change.cancel();
-      }
-    })
+    if (!username) {
+      history.push('/signin')
+      return
+    }
 
     // Promise.resolve({ source: '' })
     fetch('http://localhost:8081/frontend_api/mybot')
       .then((res) => res.json())
       .then((bot) => {
         const source = bot.source ||
-          'import botmansachs\n\n# Insert your trading code here ⚡\n'
+`import botmansachs
+
+# Insert your trading code here ⚡
+`
         this.editor.codeMirror.setValue(source)
         this.setState({ source })
       })
@@ -142,13 +141,14 @@ class BotEditorPage extends Component {
         <CodeMirror
           ref={(el) => this.editor = el}
           value={code}
-          onChange={(code) => this.setState({ code })}
+          onChange={(code) => console.log(code) || this.setState({ code })}
           options={{
             mode: 'python',
             keyMap: 'sublime',
             lineNumbers: true,
             readOnly: code === null,
           }}
+          height="600"
         />
         <div style={{ textAlign: 'center', margin: '15px 0' }}>
           <input
@@ -169,4 +169,8 @@ class BotEditorPage extends Component {
   }
 }
 
-export default withRouter(BotEditorPage)
+export default withRouter(
+  connect(
+    (state) => ({ username: state.username })
+  )(BotEditorPage)
+)

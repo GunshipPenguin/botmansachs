@@ -5,6 +5,7 @@ const config = require('../config')
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const bodyparser = require('body-parser')
+const Bot = require('./models/bot')
 
 const verifySessionMiddleware = require('./middleware/verify-session-middleware')
 const corsMiddleware = require('./middleware/cors-middleware')
@@ -22,17 +23,17 @@ const seasonController = require('./controllers/frontend/season')
 // Passport
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    Bot.findOne({ username: username }, function(err, user) {
+    Bot.findOne({ name: username }, function(err, bot) {
       if (err) {
         return done(err)
       }
-      if (!user) {
+      if (!bot) {
         return done(null, false, { message: 'Incorrect username.' })
       }
-      if (!user.validPassword(password)) {
+      if (!bot.verifyPassword(password)) {
         return done(null, false, { message: 'Incorrect password.' })
       }
-      return done(null, user)
+      return done(null, bot)
     })
   }
 ))
@@ -58,6 +59,17 @@ const frontendApi = {
       app.use(passport.initialize())
       app.use(passport.session())
 
+      app.use(session({
+        secret: config.apiSecret,
+        cookie: {
+          maxAge: 24 * 60 * 60 * 1000,
+        },
+        host: '127.0.0.1',
+        db: 'session',
+        url: `mongodb://${config.dbAddress}/${config.dbName}`,
+        port: '27017',
+      }))
+
       app.get('/frontend_api/bots/:bot', specificBotController)
 
       app.get('/frontend_api/bots', botsController)
@@ -71,14 +83,6 @@ const frontendApi = {
       app.post('/frontend_api/login', loginController)
 
       app.post('/frontend_api/register', registerController)
-
-      app.use(session({
-        secret: 'foo',
-        host: '127.0.0.1',
-        port: '27017',
-        db: 'session',
-        url: 'mongodb://localhost:27017/' + config.dbName
-      }))
 
       app.listen(config.frontendApiPort, () => {
         resolve()
