@@ -3,6 +3,16 @@ import { Link } from 'react-router-dom'
 
 class HomePage extends Component {
   render () {
+    const styleButton = {
+      backgroundColor: 'transparent',
+      display: 'inline-block',
+      color: '#ffffff',
+      border: '1px solid #ffffff',
+      padding: '4px 10px',
+      textDecoration: 'none',
+      margin: '0 10px',
+      minWidth: 72,
+    }
     return (
       <div
         style={{
@@ -26,28 +36,14 @@ class HomePage extends Component {
         >
           <Link
             to="/signup"
-            style={{
-              display: 'inline-block',
-              color: '#ffffff',
-              border: '1px solid #ffffff',
-              padding: '4px 10px',
-              textDecoration: 'none',
-              margin: '0 10px'
-            }}
+            style={styleButton}
           >
             Get Started
           </Link>
 
           <Link
             to="/leaderboard"
-            style={{
-              display: 'inline-block',
-              color: '#ffffff',
-              border: '1px solid #ffffff',
-              padding: '4px 10px',
-              textDecoration: 'none',
-              margin: '0 10px'
-            }}
+            style={styleButton}
           >
             View Leaderboard
           </Link>
