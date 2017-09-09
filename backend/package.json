@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "npm test",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -33,5 +34,8 @@
   },
   "pre-commit": [
     "npm run lint"
-  ]
+  ],
+  "dependencies": {
+    "express": "^4.15.4"
+  }
 }
