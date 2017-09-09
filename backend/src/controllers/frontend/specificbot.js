@@ -17,4 +17,8 @@ function specificBotController(req, res) {
   }).select({_id: 0, __v: 0})
 }
 
+function fillStockPrices(bot) {
+
+}
+
 module.exports = specificBotController

@@ -11,10 +11,10 @@ const stockSchema = new mongoose.Schema({
 const botSchema = new mongoose.Schema({
   name: String,
   password: String,
-  source: String,
-  rank: Number,
-  cash: Number,
-  stocks: [stockSchema],
+  source: {type: String, default: ''},
+  rank: {type: Number, default: Infinity},
+  cash: {type: Number, default: 1000000},
+  stocks: {type: [stockSchema], default: []}
 })
 
 botSchema.methods.verifyPassword = function (password) {

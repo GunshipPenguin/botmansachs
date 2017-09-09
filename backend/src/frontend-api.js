@@ -52,6 +52,12 @@ const frontendApi = {
     return new Promise((resolve, reject) => {
       const app = express()
 
+      app.use(bodyparser.json())
+      app.use(corsMiddleware)
+
+      app.use(passport.initialize())
+      app.use(passport.session())
+
       app.get('/frontend_api/bots/:bot', specificBotController)
 
       app.get('/frontend_api/bots', botsController)
@@ -65,12 +71,6 @@ const frontendApi = {
       app.post('/frontend_api/login', loginController)
 
       app.post('/frontend_api/register', registerController)
-
-      app.use(passport.initialize())
-      app.use(passport.session())
-
-      app.use(bodyparser.json())
-      app.use(corsMiddleware)
 
       app.use(session({
         secret: 'foo',
