@@ -1,2 +1,3 @@
-# pennapps16
-Gamified Algorithmic Trading
+# Botman Sachs
+
+[botmansachs.com](https://botmansachs.com)
