@@ -2,8 +2,7 @@
 var session = require('express-session')
 
 function verifySessionMiddleware (req, res, next) {
-  const user = req.session && req.session.user
-  if (!user) {
+  if (!req.session) {
     res.status(401)
     res.json({
       message: 'Forbidden.'
