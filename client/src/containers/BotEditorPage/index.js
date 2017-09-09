@@ -1,7 +1,7 @@
 import { h, Component } from 'preact'
 
 class BotEditorPage extends Component {
-  render() {
+  render () {
     return (
       <div>
         Bot Editor Page

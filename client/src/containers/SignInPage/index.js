@@ -1,7 +1,7 @@
 import { h, Component } from 'preact'
 
 class SignInPage extends Component {
-  render() {
+  render () {
     return (
       <div>
         Sign In Page

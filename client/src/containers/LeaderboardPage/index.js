@@ -1,7 +1,7 @@
 import { h, Component } from 'preact'
 
 class LeaderboardPage extends Component {
-  render() {
+  render () {
     return (
       <div>
         Leaderboard Page

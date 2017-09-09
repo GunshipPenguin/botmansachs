@@ -13,9 +13,9 @@ const renderRoute = route => (
     }
     {...route}
   />
-);
+)
 
-function App() {
+function App () {
   return (
     <BrowserRouter>
       <div>

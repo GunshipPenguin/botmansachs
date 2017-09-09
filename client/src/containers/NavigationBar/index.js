@@ -2,18 +2,18 @@ import { h, Component } from 'preact'
 import { Link } from 'react-router-dom'
 
 class NavigationBar extends Component {
-  render() {
+  render () {
     const height = 60
     const isLoggedIn = false
     const styleItem = {
-      margin:' 0 4px',
+      margin: ' 0 4px',
       height: 48,
-      padding: 4,
+      padding: 4
     }
     return (
       <div
         style={{
-          height,
+          height
         }}
       >
         <div
@@ -25,13 +25,13 @@ class NavigationBar extends Component {
             height,
             backgroundColor: '#183440',
             padding: 7,
-            boxShadow: '1px 1px 2px #333',
+            boxShadow: '1px 1px 2px #333'
           }}
         >
           <div
             style={{
               margin: 'auto',
-              maxWidth: 768,
+              maxWidth: 768
             }}
           >
             <Link
@@ -43,7 +43,7 @@ class NavigationBar extends Component {
                 border: '1px solid #fff',
                 textDecoration: 'none',
                 color: 'white',
-                fontWeight: 'bold',
+                fontWeight: 'bold'
               }}
             >
               BmS
@@ -52,7 +52,7 @@ class NavigationBar extends Component {
             <div
               style={{
                 display: 'flex',
-                float: 'right',
+                float: 'right'
               }}
             >
               <Link to="/leaderboard">

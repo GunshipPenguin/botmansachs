@@ -6,17 +6,17 @@ import { withRouter } from 'react-router-dom'
  */
 class AsyncRoute extends Component {
   state = {
-    SomeComponent: null,
+    SomeComponent: null
   };
 
-  componentWillMount() {
+  componentWillMount () {
     const {
       getComponent,
-      nextState,
-    } = this.props;
+      nextState
+    } = this.props
     getComponent(nextState, (error, SomeComponent) => {
-      this.setState({ SomeComponent });
-    });
+      this.setState({ SomeComponent })
+    })
   }
 
   render = ({}, { SomeComponent }) => <SomeComponent />
@@ -43,77 +43,77 @@ export default [
   {
     path: '/',
     exact: true,
-    getComponent(nextState, cb) {
+    getComponent (nextState, cb) {
       const renderRoute = createRenderRoute(cb)
       import('../HomePage')
         .then(renderRoute)
         .catch(errorLoading)
-    },
+    }
   },
   // SignInPage
   {
     path: '/signin',
     exact: true,
-    getComponent(nextState, cb) {
+    getComponent (nextState, cb) {
       const renderRoute = createRenderRoute(cb)
       import('../SignInPage')
         .then(renderRoute)
         .catch(errorLoading)
-    },
+    }
   },
   // SignUpPage
   {
     path: '/signup',
     exact: true,
-    getComponent(nextState, cb) {
+    getComponent (nextState, cb) {
       const renderRoute = createRenderRoute(cb)
       import('../SignUpPage')
         .then(renderRoute)
         .catch(errorLoading)
-    },
+    }
   },
   // LeaderboardPage
   {
     path: '/leaderboard',
     exact: true,
-    getComponent(nextState, cb) {
+    getComponent (nextState, cb) {
       const renderRoute = createRenderRoute(cb)
       import('../LeaderboardPage')
         .then(renderRoute)
         .catch(errorLoading)
-    },
+    }
   },
   // UserPage, mine
   {
     path: '/me',
     exact: true,
-    getComponent(nextState, cb) {
+    getComponent (nextState, cb) {
       const renderRoute = createRenderRoute(cb)
       import('../UserPage')
         .then(renderRoute)
         .catch(errorLoading)
-    },
+    }
   },
   // BotEditorPage
   {
     path: '/me/bot',
     exact: true,
-    getComponent(nextState, cb) {
+    getComponent (nextState, cb) {
       const renderRoute = createRenderRoute(cb)
       import('../BotEditorPage')
         .then(renderRoute)
         .catch(errorLoading)
-    },
+    }
   },
   // UserPage, someone else
   {
     path: '/leaderboard/:username',
     exact: true,
-    getComponent(nextState, cb) {
+    getComponent (nextState, cb) {
       const renderRoute = createRenderRoute(cb)
       import('../UserPage')
         .then(renderRoute)
         .catch(errorLoading)
-    },
+    }
   }
 ]

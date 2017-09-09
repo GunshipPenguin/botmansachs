@@ -2,13 +2,13 @@ import { h, Component } from 'preact'
 import { Link } from 'react-router-dom'
 
 class HomePage extends Component {
-  render() {
+  render () {
     return (
       <div
         style={{
           margin: 'auto',
           maxWidth: 768,
-          padding: 10,
+          padding: 10
         }}
       >
         <h1>
@@ -21,7 +21,7 @@ class HomePage extends Component {
 
         <div
           style={{
-            textAlign: 'center',
+            textAlign: 'center'
           }}
         >
           <Link
@@ -32,7 +32,7 @@ class HomePage extends Component {
               border: '1px solid #ffffff',
               padding: '4px 10px',
               textDecoration: 'none',
-              margin: '0 10px',
+              margin: '0 10px'
             }}
           >
             Get Started
@@ -46,7 +46,7 @@ class HomePage extends Component {
               border: '1px solid #ffffff',
               padding: '4px 10px',
               textDecoration: 'none',
-              margin: '0 10px',
+              margin: '0 10px'
             }}
           >
             View Leaderboard
@@ -55,7 +55,7 @@ class HomePage extends Component {
 
         <div
           style={{
-            textAlign: 'center',
+            textAlign: 'center'
           }}
         >
           <h3>
