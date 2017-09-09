@@ -5,45 +5,70 @@ import { Line } from 'react-chartjs-2'
 class UserPage extends Component {
   state = {
     tab: 'stocks',
+    user: null,
   }
 
-  render ({}, { tab }) {
-    const user = {
-      'rank': 2,
-      'name': 'pennbot',
-      'holdings': 15212,
-      'cash': '212',
+  componentDidMount() {
+    this.fetchBot()
+    setInterval(this.fetchBot, 1000)
+  }
+
+  fetchBot = () => {
+    const {
+      match,
+    } = this.props
+    const username = match.path === '/me'
+      ? 'TODO'
+      : match.params.username
+    Promise.resolve({
+      'rank': Math.round(Math.random() * 50),
+      'name': username,
+      'holdings': Math.round(Math.random() * 100000) + 10000,
+      'cash': 10000,
       'history': [
-        { 'timestamp': 1234453235, 'holdings': 12000 },
-        { 'timestamp': 1234453245, 'holdings': 11000 },
-        { 'timestamp': 1234453255, 'holdings': 11500 },
-        { 'timestamp': 1234453265, 'holdings': 11829 },
-        { 'timestamp': 1234453275, 'holdings': 13022 },
-        { 'timestamp': 1234453235, 'holdings': 12000 },
-        { 'timestamp': 1234453245, 'holdings': 11000 },
-        { 'timestamp': 1234453255, 'holdings': 11500 },
-        { 'timestamp': 1234453265, 'holdings': 11829 },
-        { 'timestamp': 1234453275, 'holdings': 13022 },
-        { 'timestamp': 1234453235, 'holdings': 12000 },
-        { 'timestamp': 1234453245, 'holdings': 11000 },
-        { 'timestamp': 1234453255, 'holdings': 11500 },
-        { 'timestamp': 1234453265, 'holdings': 11829 },
-        { 'timestamp': 1234453275, 'holdings': 13022 },
+        { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453235000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453245000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453255000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453265000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
+        { 'timestamp': 1234453275000, 'holdings': Math.round(Math.random() * 100000) + 10000 },
       ],
       'stocks': [
         {
           'symbol': 'AAPL',
           'name': 'Apple Inc.',
-          'shares': 200,
+          'shares': Math.round(Math.random() * 100),
           'value': 1400,
         },
         {
           'symbol': 'MSFT',
           'name': 'Microsoft Corporation',
-          'shares': 125,
+          'shares': Math.round(Math.random() * 125),
           'value': 400,
         }
       ]
+    })
+    // fetch(`https://api.botmansachs.com/frontend_api/bots/${username}`)
+      // .then((res) => res.json())
+      .then((user) => {
+        this.setState({ user })
+      })
+      .catch(console.error)
+  }
+
+
+  render ({}, { tab, user }) {
+    if (!user) {
+      return
     }
     const styleButton = {
       backgroundColor: 'transparent',
@@ -116,7 +141,7 @@ class UserPage extends Component {
                 lineHeight: '3.6'
               }}
             >
-              {user.rank}
+              {user.rank !== Number.MAX_SAFE_INTEGER ? user.rank : '∅'}
             </div>
           </div>
         </div>
@@ -228,7 +253,7 @@ class UserPage extends Component {
                 <Line
                   data={{
                     labels: user.history.map((x) =>
-                      new Date(x.timestamp * 1000)
+                      new Date(x.timestamp)
                         .toISOString()
                         .split('T')[0]
                     ),
