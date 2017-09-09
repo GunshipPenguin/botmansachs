@@ -141,7 +141,7 @@ class BotEditorPage extends Component {
         <CodeMirror
           ref={(el) => this.editor = el}
           value={code}
-          onChange={(code) => this.setState({ code })}
+          onChange={(code) => console.log(code) || this.setState({ code })}
           options={{
             mode: 'python',
             keyMap: 'sublime',
