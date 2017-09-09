@@ -1,6 +1,7 @@
 'use strict'
+const passport = require('passport')
 
-function loginController(req, res) {
+function loginController(req, res, next) {
   // Is logged in
   if (req.session && req.session.user) {
      res.status(400).json({error: 'already logged in'})

@@ -5,6 +5,7 @@ const config = require('../config')
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const bodyparser = require('body-parser')
+const Bot = require('./models/bot')
 
 const verifySessionMiddleware = require('./middleware/verify-session-middleware')
 const corsMiddleware = require('./middleware/cors-middleware')
