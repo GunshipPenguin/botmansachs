@@ -1,3 +1,4 @@
+'use strict'
 const tradingApi = require('./src/trading-api')
 
 tradingApi.start().then(() => {
