@@ -1,8 +1,12 @@
 'use strict'
 const config = {
-  // Port on which the trading API runs
+  // Address of the MongoDB server
+  dbAddress: 'localhost',
+
+  // Port on which the trading API listens
   tradingApiPort: 8080,
 
+  // Port on which the frontend API listens
   frontendApiPort: 8081,
 
   // Base URL for the Blackrock Aladdin API
