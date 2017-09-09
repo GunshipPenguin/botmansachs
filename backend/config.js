@@ -1,7 +1,7 @@
 'use strict'
 const config = {
   // Address of the MongoDB server
-  dbAddress: 'localhost',
+  dbAddress: 'mongodb',
 
   // Database name in mongo
   dbName: 'botmansachs',
