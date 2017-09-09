@@ -3,6 +3,9 @@ const config = {
   // Address of the MongoDB server
   dbAddress: 'localhost',
 
+  // Database name in mongo
+  dbName: 'botmansachs',
+
   // Port on which the trading API listens
   tradingApiPort: 8080,
 

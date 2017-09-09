@@ -8,7 +8,7 @@ const getMyBotController = require('./controllers/frontend/bots')
 const loginController = require('./controllers/frontend/bots')
 const patchMyBotController = require('./controllers/frontend/bots')
 const registerController = require('./controllers/frontend/bots')
-const seasonController = require('./controllers/frontend/bots')
+const seasonController = require('./controllers/frontend/season')
 
 const frontendApi = {
   start: function () {
