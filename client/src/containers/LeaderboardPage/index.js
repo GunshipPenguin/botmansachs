@@ -1,29 +1,60 @@
 import { h, Component } from 'preact'
 
 class LeaderboardPage extends Component {
-  render () {
-    const bots = [
-      {
-        'name': 'pennbot',
-        'rank': 1,
-        'holdings': 15212
-      },
-      {
-        'name': 'traderbot6',
-        'rank': 2,
-        'holdings': 12444
-      },
-      {
-        'name': 'asdfbot',
-        'rank': 3,
-        'holdings': 2222
-      },
-      {
-        'name': 'brickbreaker',
-        'rank': 4,
-        'holdings': 1111
-      }
-    ]
+  state = {
+    bots: null,
+    search: '',
+  }
+
+  componentDidMount() {
+    this.fetchBots()
+  }
+
+  fetchBots = (search = null, flush = false) => {
+    if (flush) {
+      this.setState({ bots })
+    }
+    const searchQuery = search ? '&searchterm=' + search : ''
+    Promise.resolve({ bots: [
+        {
+          'name': 'pennbot',
+          'rank': 1,
+          'holdings': 15212
+        },
+        {
+          'name': 'traderbot6',
+          'rank': 2,
+          'holdings': 12444
+        },
+        {
+          'name': 'asdfbot',
+          'rank': 3,
+          'holdings': 2222
+        },
+        {
+          'name': 'brickbreaker',
+          'rank': 4,
+          'holdings': 1111
+        }
+      ].filter(x => !search || x.name.match(search))
+    })
+    // fetch(`https://api.botmansachs.com/frontend_api/bots?after=0&limit=200${searchQuery}`)
+      // .then((res) => res.json())
+      .then(({ bots }) => {
+        this.setState({ bots })
+      })
+      .catch(console.error)
+  }
+
+  handleSearch = (event) => {
+    event.preventDefault()
+    this.fetchBots(this.state.search || null)
+  }
+
+  render ({}, { bots, search }) {
+    if (!bots) {
+      return
+    }
     const styleLabel = {
       fontSize: 18
     }
@@ -53,13 +84,14 @@ class LeaderboardPage extends Component {
         }}
       >
         <h1>Leaderboard</h1>
-        <form>
-
+        <form onSubmit={this.handleSearch}>
           <input
             type="search"
-            maxLength={48}
+            maxLength={24}
             placeholder="Search"
+            value={search}
             style={styleInput}
+            onInput={({ target }) => this.setState({ search: target.value })}
           />
 
           <input
@@ -98,7 +130,7 @@ class LeaderboardPage extends Component {
                   fontWeight: 'bold'
                 }}
               >
-                {bot.rank}.
+                {user.rank !== Number.MAX_SAFE_INTEGER ? user.rank + '.' : '∅'}
               </span>
               &nbsp;
               <span>
