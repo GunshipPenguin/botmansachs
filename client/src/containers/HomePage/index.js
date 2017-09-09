@@ -6,12 +6,12 @@ class HomePage extends Component {
     const styleButton = {
       backgroundColor: 'transparent',
       display: 'inline-block',
-      color: '#ffffff',
-      border: '1px solid #ffffff',
+      color: 'white',
+      border: '1px solid white',
       padding: '4px 10px',
       textDecoration: 'none',
       margin: '0 10px',
-      minWidth: 72,
+      minWidth: 72
     }
     return (
       <div

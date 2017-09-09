@@ -4,24 +4,24 @@ import { Link } from 'react-router-dom'
 class SignInPage extends Component {
   render () {
     const styleLabel = {
-      fontSize: 18,
+      fontSize: 18
     }
     const styleInput = {
-      backgroundColor: '#ffffff',
+      backgroundColor: 'white',
       border: 'none',
       padding: 10,
       borderBottom: '4px solid #183440',
-      width: '100%',
+      width: '100%'
     }
     const styleButton = {
       backgroundColor: 'transparent',
       display: 'inline-block',
-      color: '#ffffff',
-      border: '1px solid #ffffff',
+      color: 'white',
+      border: '1px solid white',
       padding: '4px 10px',
       textDecoration: 'none',
       margin: '0 10px',
-      minWidth: 72,
+      minWidth: 72
     }
     return (
       <form
@@ -63,7 +63,7 @@ class SignInPage extends Component {
 
         <p
           style={{
-            textAlign: 'center',
+            textAlign: 'center'
           }}
         >
           <input

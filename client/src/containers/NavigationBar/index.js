@@ -40,7 +40,7 @@ class NavigationBar extends Component {
                 display: 'inline-block',
                 fontSize: 26,
                 padding: '4px 10px',
-                border: '1px solid #fff',
+                border: '1px solid white',
                 textDecoration: 'none',
                 color: 'white',
                 fontWeight: 'bold'
