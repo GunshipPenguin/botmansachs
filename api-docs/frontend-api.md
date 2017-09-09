@@ -19,10 +19,9 @@ Parameters:
 
 | Name        | Type   | Description                                                             |
 |-------------|--------|-------------------------------------------------------------------------|
-| before      | number | Return all bots before this rank                                        |
 | after       | number | Return all bots after this rank                                         |
 | limit       | number | Number of bots to return                                                |
-| searchterm  | string | Search term to match bot names on, if omitted all bots will be returned |
+| search_term | string | Search term to match bot names on, if omitted all bots will be returned |
 
 Response:
 
@@ -35,7 +34,7 @@ Response:
 
 Example request:
 ```
-GET https://botmansachs.com/bots
+GET https://botmansachs.com/bots?after=0&limit=3
 ```
 
 Example response:
