@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "Botman Sachs Backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GunshipPenguin/botmansachs.git"
+  },
+  "keywords": [
+    "trading",
+    "stocks",
+    "finance"
+  ],
+  "author": "Rhys Rustad-Elliott,Omar Chehab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GunshipPenguin/botmansachs/issues"
+  },
+  "homepage": "https://github.com/GunshipPenguin/botmansachs#readme"
+}
