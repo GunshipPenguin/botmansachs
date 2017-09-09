@@ -17,7 +17,7 @@ Parameters:
 
 | Name         | Type   | Description                                                                                     |
 |--------------|--------|-------------------------------------------------------------------------------------------------|
-| api          | string | Blackrock api to query (performance_data, portfolio_analysis, search_securities, security_data) |
+| api          | string | Blackrock api to query (performance-data, portfolio-analysis, search-securities, security-data) |
 | query_string | string | String to query the selected Blackrock API with                                                 |
 
 Response: Same as Blackrock API.
