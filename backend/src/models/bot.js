@@ -11,6 +11,7 @@ const stockSchema = new mongoose.Schema({
 const botSchema = new mongoose.Schema({
   name: String,
   password: String,
+  source: String,
   rank: Number,
   cash: Number,
   stocks: [stockSchema],
