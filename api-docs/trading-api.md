@@ -100,6 +100,7 @@ Parameters:
 
 | Name         | Type   | Description                                                   |
 |--------------|--------|---------------------------------------------------------------|
+| bot_name     | string | Name of bot to buy for                                        |
 | symbol       | string | Symbol of stock to buy                                        |
 | quantity     | number | Quantity to buy                                               |
 
@@ -116,6 +117,7 @@ Parameters:
 
 | Name         | Type   | Description                                                   |
 |--------------|--------|---------------------------------------------------------------|
+| bot_name     | string | Name of bot to buy for                                        |
 | symbol       | string | Symbol of stock to sell                                       |
 | quantity     | number | Quantity to buy                                               |
 
@@ -128,6 +130,12 @@ GET https://botmansachs.com/trading_api/sell?symbol=AAPL&quantity=20
 ## PATCH /persist
 Store data persistently.
 
+Parameters:
+
+| Name         | Type   | Description                                                   |
+|--------------|--------|---------------------------------------------------------------|
+| bot_name     | string | Name of bot to buy for                                        |
+
 Example request:
 
 ```
@@ -135,6 +143,12 @@ PATCH https://botmansachs.com/trading_api/persist
 ```
 
 ## GET /persist
+
+Parameters:
+
+| Name         | Type   | Description                                                   |
+|--------------|--------|---------------------------------------------------------------|
+| bot_name     | string | Name of bot to buy for                                        |
 
 Example request:
 
