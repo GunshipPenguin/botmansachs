@@ -9,8 +9,12 @@
 |--------|--------------|-------------------------------------------------------|
 | GET    | /blackrock   | Query the Blackrock Aladdin API                       |
 | GET    | /news        | Query the News Api                                    |
+| GET    | /buy         | Buy a stock/security                                  |
+| GET    | /sell        | Sell a stock/security                                 |
+| PATCH  | /persist     | Store data persistently                               |
+| GET    | /persist     | Get persistentely stored data                         |
 
-# GET /blackrock
+## GET /blackrock
 Query the Blackrock Aladdin API for financial information
 
 Parameters:
@@ -56,7 +60,7 @@ Example response:
   ... + >2 KB of information on MSFT and AAPL
 ```
 
-# GET /news
+## GET /news
 Query the News API for news related to a search keyword
 
 Parameters:
@@ -87,4 +91,53 @@ Example response:
       "publishedAt": "2017-09-09T08:00:26Z"
     }
   ]
+```
+
+## GET /buy
+Buy a stock or security.
+
+Parameters:
+
+| Name         | Type   | Description                                                   |
+|--------------|--------|---------------------------------------------------------------|
+| symbol       | string | Symbol of stock to buy                                        |
+| quantity     | number | Quantity to buy                                               |
+
+Example request:
+
+```
+GET https://botmansachs.com/trading_api/buy?symbol=AAPL&quantity=20
+```
+
+## GET /sell
+Sell a stock or security.
+
+Parameters:
+
+| Name         | Type   | Description                                                   |
+|--------------|--------|---------------------------------------------------------------|
+| symbol       | string | Symbol of stock to sell                                       |
+| quantity     | number | Quantity to buy                                               |
+
+Example request:
+
+```
+GET https://botmansachs.com/trading_api/sell?symbol=AAPL&quantity=20
+```
+
+## PATCH /persist
+Store data persistently.
+
+Example request:
+
+```
+PATCH https://botmansachs.com/trading_api/persist
+```
+
+## GET /persist
+
+Example request:
+
+```
+GET https://botmansachs.com/trading_api/persist
 ```
