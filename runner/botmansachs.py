@@ -3,7 +3,7 @@ import requests
 import json
 from urllib.parse import quote, urlencode
 
-__API_URL = 'http://localhost:8080'
+__API_URL = 'http://api:8080'
 
 
 __bot_name = ''

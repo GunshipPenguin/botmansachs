@@ -28,6 +28,6 @@ amqp.connect('amqp://rabbitmq', function(err, conn) {
     }
 
     console.log('Tick dispatcher started')
-    setInterval(tick, 5000)
+    setInterval(tick, 10000)
   });
 });
