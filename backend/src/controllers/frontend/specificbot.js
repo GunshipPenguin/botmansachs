@@ -36,6 +36,7 @@ function fillStockPrices(stocks, cb) {
     let newStocks = stocks.map((stock, index) => {
       return {
         symbol: stock.symbol,
+        quantity: stock.quantity,
         name: stock.name,
         shares: stock.shares,
         price: parseFloat(priceArray[index])
