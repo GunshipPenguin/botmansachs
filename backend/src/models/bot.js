@@ -1,6 +1,7 @@
 'use strict'
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const yahooFinance = require('../apis/yahoofinance')
 
 const stockSchema = new mongoose.Schema({
   symbol: String,
@@ -21,6 +22,7 @@ const botSchema = new mongoose.Schema({
   cash: { type: Number, default: 1000000 },
   stocks: { type: [stockSchema], default: [] },
   history: { type: [historySchema], default: [] },
+  persist: { type: String, default: '' }
 })
 
 botSchema.methods.verifyPassword = function (password) {
@@ -32,6 +34,56 @@ botSchema.methods.verifyPassword = function (password) {
       resolve(valid)
     })
   })
+}
+
+botSchema.methods.adjustCash = function(amount) {
+  this.cash += amount
+  this.save()
+}
+
+botSchema.methods.addStock = function (symbol, quantity) {
+  // See if this bot already owns the requested stock
+  const index = this.stocks.findIndex(stock => {
+    return stock.symbol == symbol
+  })
+
+  // Create new stock
+  if (index == -1) {
+    yahooFinance.getStockInfo(symbol, (err, stockInfo) => {
+      this.stocks.push(
+        {
+          symbol: symbol,
+          name: stockInfo.name,
+          quantity: quantity
+        }
+      )
+      this.save()
+    })
+  } else { // Update existing stock
+    this.stocks[index].quantity += quantity
+    this.save()
+  }
+}
+
+botSchema.methods.getStock = function (symbol) {
+  const index = this.stocks.findIndex(stock => {
+    return stock.symbol == symbol
+  })
+
+  return index == -1 ? null : this.stocks[index]
+}
+
+botSchema.methods.removeStock = function (symbol, quantity) {
+  const index = this.stocks.findIndex(stock => {
+    return stock.symbol == symbol
+  })
+
+  if (index != -1) {
+    this.stocks[index].quantity -= quantity
+    if (this.stocks[index].quantity == 0) {
+      this.stocks.splice(index, 1)
+    }
+  }
 }
 
 // Hashing Password

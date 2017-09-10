@@ -8,8 +8,7 @@ const blackrockController = function (req, res) {
     return
   }
 
-  const requestUrl = config.blackrockApiBaseUrl + '/' + req.query.api + '?' + req.query.query_string
-  console.log(requestUrl)
+  const requestUrl = config.blackrockApiBaseUrl + '/' + req.query.api + '?' + decodeURIComponent(req.query.query_string)
 
   request(requestUrl, (error, response, body) => {
     if (error) {
