@@ -55,10 +55,13 @@ class LeaderboardPage extends Component {
     fetch(`http://localhost:8081/frontend_api/bots?after=0&limit=200${searchQuery}`)
       .then((res) => res.json())
       .then(({ bots }) => {
-        this.setState({ bots: bots.map(x => ({
-          ...x,
-          holdings: Math.round(x.holdings),
-        })) })
+        this.setState({
+          bots: bots
+            .map(x => ({
+              ...x,
+              holdings: Math.round(x.holdings),
+            })
+        ) })
       })
       .catch(console.error)
   }

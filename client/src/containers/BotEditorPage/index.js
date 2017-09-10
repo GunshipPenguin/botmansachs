@@ -1,6 +1,7 @@
 import { h, Component } from 'preact'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import Markdown from 'react-markdown'
 import CodeMirror from 'react-codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/python/python'
@@ -168,6 +169,117 @@ botmansachs.__register_bot__('${username}')
             value="Save and Exit"
           />
           {lastSaved && <p>Last saved {lastSaved.toLocaleTimeString()}</p>}
+          <div style={{ margin: 'auto', maxWidth: 768, textAlign: 'left'}}>
+          <Markdown source={`
+# Botman Sachs API
+
+## Blackrock API
+
+Query a Blackrock API for financial information. Blocks until the request is
+complete.
+
+[Blackrock API Reference](https://www.blackrock.com/tools/api-tester/hackathon)
+
+
+**Example**
+
+\`botmansacs.query_blackrock_api(api_name, query)\`
+
+
+**Parameters**
+
+\`api_name\` is a \`string\` and must be one of
+
+* \`performance-data\`
+* \`portfolio-analysis\`
+* \`search-securities\`
+* \`security-data\`
+
+
+\`query\` is a dictionary of key value pairs representing the query string that
+will be sent alongside your request
+
+
+**Response**
+
+
+Returns a JSON string.
+
+
+## Yahoo Finance API
+
+Query the yahoo finance API for information on a particular stock. Data returned
+is a dictionary of the form {price: int, name: str}. Blocks until the information
+is retrieved.
+
+
+**Example**
+
+
+\`botmansacs.query_yahoo_finance_api(symbol)\`
+
+
+**Parameters**
+
+
+\`symbol\` is a string of a company symbol.
+
+For example, \`msft\` is Microsoft's symbol.
+
+
+**Response**
+
+
+Returns a dictionary with keys \`price\` and \`name\`.
+
+
+## Buy Stock
+
+Buy the specified quantity of the specified stock, will return an error message if you
+have insufficent funds or specify an invalid stock symbol. Blocks until the buy is complete.
+
+
+**Example**
+
+
+\`botmansacs.buy(symbol, quantity)\`
+
+
+**Parameters**
+
+\`symbol\` is a string of a company symbol.
+
+For example, \`msft\` is Microsoft's symbol.
+
+
+\`quantity\` is a number representing how many stocks will be bought.
+
+
+**Response**
+
+None if it succeeds.
+
+Error as JSON if there is an error.
+
+
+## Sell Stock
+
+
+**Response**
+
+## Sell Stock
+
+Sell the specified quantity of the specified stock,  will return an error message if you
+don't have enough stock or specify an invalid stock symbol. Blocks until the sell is complete.
+
+
+**Example**
+
+\`botmansachs.sell(symbol, quantity)\`
+
+
+          `} />
+          </div>
         </div>
       </form>
     )
