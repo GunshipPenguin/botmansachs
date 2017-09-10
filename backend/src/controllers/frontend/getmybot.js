@@ -2,7 +2,7 @@
 const Bot = require('../../models/bot')
 
 function getMyBotController(req, res) {
-  const username = req.session.user
+  const username = req.session.user.name
 
   Bot.updateOne({name: username}, {source: req.body.source}, (err, bot) => {
     if (err) {

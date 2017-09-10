@@ -20,6 +20,10 @@ const patchMyBotController = require('./controllers/frontend/patchmybot')
 const registerController = require('./controllers/frontend/register')
 const seasonController = require('./controllers/frontend/season')
 
+const store = new MongoStore({
+  url: `mongodb://${config.dbAddress}/${config.dbName}`
+})
+
 // Passport
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -30,10 +34,14 @@ passport.use(new LocalStrategy(
       if (!bot) {
         return done(null, false, { message: 'Incorrect username.' })
       }
-      if (!bot.verifyPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' })
-      }
-      return done(null, bot)
+      bot.verifyPassword(password)
+        .then((isValid) => {
+          if (!isValid) {
+            done(null, false, { message: 'Incorrect password.' })
+          } else {
+            done(null, bot)
+          }
+        })
     })
   }
 ))
@@ -64,10 +72,9 @@ const frontendApi = {
         cookie: {
           maxAge: 24 * 60 * 60 * 1000,
         },
-        host: '127.0.0.1',
-        db: 'session',
-        url: `mongodb://${config.dbAddress}/${config.dbName}`,
-        port: '27017',
+        resave: false,
+        saveUninitialized: false,
+        store,
       }))
 
       app.get('/frontend_api/bots/:bot', specificBotController)
