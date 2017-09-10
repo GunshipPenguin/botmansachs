@@ -5,23 +5,41 @@ services:
     image: node:boron
     ports:
       - 80:80
-    working_dir: '/app'
+    working_dir: /app
     volumes:
-      - './client:/app'
+      - ./client:/app
     command: bash -c "npm install && npm start"
 
   api:
     image: node:boron
     links:
       - mongodb
+      - rabbitmq
     ports:
       - 8080:8080
       - 8081:8081
-    working_dir: '/app'
+    working_dir: /app
     volumes:
-      - './backend:/app'
+      - ./backend:/app
     command: bash -c "npm install && npm start"
+  
+  runners:
+    # image: python:3.6-slim
+    image: node:boron
+    links:
+      - rabbitmq
+    depends_on:
+      - api
+    working_dir: /app
+    volumes:
+      - ./runner:/app
+    command: bash -c "npm install && node runner.js"
 
+  rabbitmq:
+    image: rabbitmq:3.6
+    ports:
+      - 5672:5672
+      
   mongodb:
     image: mongo:3.4
     ports:
