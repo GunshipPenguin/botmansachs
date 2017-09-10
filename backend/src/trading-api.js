@@ -18,6 +18,8 @@ const tradingApi = {
 
       app.get('/trading_api/stockquote/:symbol', stockQuoteController)
 
+      app.get('/trading_api/news', newsController)
+
       app.get('/trading_api/buy', buyController)
 
       app.get('/trading_api/sell', sellController)

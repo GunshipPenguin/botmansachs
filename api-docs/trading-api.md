@@ -62,36 +62,104 @@ Example response:
 ```
 
 ## GET /news
-Query the News API for news related to a search keyword
+Query the Yahoo finance API for news related to a particular stock
 
 Parameters:
 
 | Name         | Type   | Description                                                                                     |
 |--------------|--------|-------------------------------------------------------------------------------------------------|
-| search_term  | string | Term to search for news from                                                                    |
+| quote        | string | Stock quote to get news for                                                                    |
 
-Response: Same as News API.
+Response: Same as Yahoo Finance API
 
 Example request:
 
 ```
-GET https://botmansachs.com/trading_api/news?search_term=Microsoft
+GET https://botmansachs.com/trading_api/news?symbol=tsla
 ```
 
 Example response:
 
 ```
 {
-  "articles": [
-    {
-      "author": "Some tech reporter",
-      "title": "Microsoft does something important",
-      "description": "Microsoft did something really important today that will probably impact its stock price",
-      "url": "https://cnn.com/somearticle",
-      "urlToImage": "https://cnn.com/someimage.png",
-      "publishedAt": "2017-09-09T08:00:26Z"
-    }
-  ]
+  "rss": {
+    "$": {
+      "version": "2.0"
+    },
+    "channel": [
+      {
+        "copyright": [
+          "Copyright (c) 2017 Yahoo! Inc. All rights reserved."
+        ],
+        "description": [
+          "Latest Financial News for tsla"
+        ],
+        "image": [
+          {
+            "height": [
+              "45"
+            ],
+            "link": [
+              "http:\/\/finance.yahoo.com\/q\/h?s=tsla"
+            ],
+            "title": [
+              "Yahoo! Finance: tsla News"
+            ],
+            "url": [
+              "http:\/\/l.yimg.com\/a\/i\/brand\/purplelogo\/uh\/us\/fin.gif"
+            ],
+            "width": [
+              "144"
+            ]
+          }
+        ],
+        "item": [
+          {
+            "description": [
+              "The electric-car specialist has resisted pressure to do a stock split so far, but its stock price keeps rising."
+            ],
+            "guid": [
+              {
+                "$": {
+                  "isPermaLink": "false"
+                },
+                "_": "d50a7a73-5a75-3f8c-b645-05127bfbb54d"
+              }
+            ],
+            "link": [
+              "http:\/\/finance.yahoo.com\/r\/d50a7a73-5a75-3f8c-b645-05127bfbb54d\/will-tesla-finally-split-its-stock.aspx?yptr=yahoo&.tsrc=rss"
+            ],
+            "pubDate": [
+              "Sat, 09 Sep 2017 14:34:00 +0000"
+            ],
+            "title": [
+              "Will Tesla Finally Split Its Stock?"
+            ]
+          },
+          {
+            "description": [
+              "The company&apos;s solar energy ambitions are huge, and despite the hype, they may be a big risk for it."
+            ],
+            "guid": [
+              {
+                "$": {
+                  "isPermaLink": "false"
+                },
+                "_": "efc68b39-fed7-3dae-a01d-5970379c2abc"
+              }
+            ],
+            "link": [
+              "http:\/\/finance.yahoo.com\/r\/efc68b39-fed7-3dae-a01d-5970379c2abc\/tesla-takes-aim-at-the-worlds-biggest-solar-manufa.aspx?yptr=yahoo&.tsrc=rss"
+            ],
+            "pubDate": [
+              "Sat, 09 Sep 2017 12:15:00 +0000"
+            ],
+            "title": [
+              "Tesla Takes Aim at the World&apos;s Biggest Solar Manufacturers"
+            ]
+          },
+... More news articles on TSLA
+
 ```
 
 ## GET /stockquote/{stock}
