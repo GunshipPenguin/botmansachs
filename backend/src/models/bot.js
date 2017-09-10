@@ -86,6 +86,14 @@ botSchema.methods.removeStock = function (symbol, quantity) {
   }
 }
 
+botSchema.methods.addHistory = function (timestamp, holdings) {
+  this.history.push({
+    timestamp,
+    holdings,
+  })
+  this.save()
+}
+
 // Hashing Password
 function hashPassword (next) {
   bcrypt.genSalt(10, (err, salt) => {
