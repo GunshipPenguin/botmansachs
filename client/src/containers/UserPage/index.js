@@ -4,7 +4,10 @@ import { withRouter } from 'react-router-dom'
 import { Line } from 'react-chartjs-2'
 
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if (!x) {
+    return 0
+  }
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 class UserPage extends Component {

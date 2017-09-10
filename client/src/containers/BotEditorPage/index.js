@@ -29,6 +29,7 @@ class BotEditorPage extends Component {
       .then((bot) => {
         const source = bot.source ||
 `import botmansachs
+botmansachs.__register_bot__('${username}')
 
 # Insert your trading code here ⚡
 `

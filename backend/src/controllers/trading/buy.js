@@ -4,6 +4,7 @@ const request = require('request')
 const yahooFinance = require('../../apis/yahoofinance')
 
 const buyController = function (req, res) {
+  console.log(req.query.bot_name)
   if (!req.query.bot_name) {
     res.status(400).json({error: 'bot name must be specified'})
     return

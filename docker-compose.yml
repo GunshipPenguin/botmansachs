@@ -24,8 +24,7 @@ services:
     command: bash -c "npm install && npm start"
   
   runners:
-    # image: python:3.6-slim
-    image: node:boron
+    build: ./runner
     links:
       - rabbitmq
     depends_on:
@@ -33,7 +32,7 @@ services:
     working_dir: /app
     volumes:
       - ./runner:/app
-    command: bash -c "npm install && node runner.js"
+    command: bash -c "pip install -r requirements.txt && npm install && npm start"
 
   rabbitmq:
     image: rabbitmq:3.6
