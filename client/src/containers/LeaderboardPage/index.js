@@ -13,11 +13,16 @@ class LeaderboardPage extends Component {
 
   componentDidMount() {
     this.fetchBots()
+    this.interval = setInterval(this.fetchBots, 5000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   fetchBots = (search = null, flush = false) => {
     if (flush) {
-      this.setState({ bots })
+      this.setState({ bots: null })
     }
     const searchQuery = search ? '&search_term=' + search : ''
     // Promise.resolve({ bots: [

@@ -84,7 +84,8 @@ class UserPage extends Component {
         this.setState({ user: {
           ...user,
           cash: Math.round(user.cash),
-          history: user.history.map(x => ({...x,holdings:Math.round(x.holdings)}))
+          history: user.history.map(x => ({...x,holdings:Math.round(x.holdings)})),
+          stocks: user.stocks.map(x => ({...x,shares:Math.round(x.shares)})),
         } })
       })
       .catch(console.error)
@@ -206,7 +207,7 @@ class UserPage extends Component {
                 </p>}
                 {user.stocks.map((stock) => (
                   <div
-                    key={stock.symbol + stock.shares}
+                    key={stock.symbol}
                     style={{
                       overflowX: 'scroll',
                       fontSize: 18,
@@ -257,6 +258,9 @@ class UserPage extends Component {
 
             {tab === 'history' && (
               <div style={{ overflowX: 'scroll', padding: 15 }}>
+                {user.history.length <= 3 && <p style={{ padding: '0 15px' }}>
+                  No history.
+                </p>}
                 <Line
                   data={{
                     labels: user.history.map((x) =>
