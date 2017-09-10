@@ -29,11 +29,12 @@ function botsController(req, res) {
   Bot.find(query, (err, bots) => {
    if (err) {
      res.status(500).send('Internal error while retreiving bot information')
+     return
    } else {
      const resData = {bots: bots}
      res.json(resData)
    }
- }).sort(sortParams).limit(limit).select({_id: 0, __v: 0, password: 0, source: 0})
+ }).sort(sortParams).limit(limit).select({_id: 0, __v: 0, password: 0, source: 0, persist: 0})
 }
 
 module.exports = botsController

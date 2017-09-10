@@ -35,6 +35,8 @@ const sellController = function (req, res) {
         return
       }
 
+      bot.updateStockPrice(symbol, stockInfo.price)
+
       const botStockInfo = bot.getStock(symbol)
       if (botStockInfo.quantity < quantity) {
         res.status(400).json({error: 'you are attempting to sell more of one stock than you have'})

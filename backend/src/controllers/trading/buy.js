@@ -42,6 +42,8 @@ const buyController = function (req, res) {
       } else {
         res.status(400).json({error: 'Insufficent funds'})
       }
+
+      bot.updateStockPrice(symbol, stockInfo.price)
     })
   })
 }
