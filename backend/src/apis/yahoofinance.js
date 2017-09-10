@@ -13,12 +13,16 @@ const yahooFinance = {
       const bodySplit = body.split(',')
 
       const price = parseFloat(bodySplit[0], 10)
-      const name = bodySplit[1]
+      const name = bodySplit[1].trim()
 
-      cb({
-        price: price,
-        name: name.trim()
-      })
+      if (name == 'N/A') {
+        cb({error: 'invalid stock symbol'}, null)
+      } else {
+        cb(null, {
+          price: price,
+          name: name
+        })
+      }
     })
   }
 }

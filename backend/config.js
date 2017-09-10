@@ -4,7 +4,7 @@ const config = {
   apiSecret: '135kjdlsu5ljlsak5jklw35jk',
 
   // Address of the MongoDB server
-  dbAddress: 'mongodb',
+  dbAddress: 'localhost',
 
   // Database name in mongo
   dbName: 'botmansachs',

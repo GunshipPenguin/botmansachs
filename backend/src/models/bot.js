@@ -1,6 +1,7 @@
 'use strict'
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const yahooFinance = require('../apis/yahoofinance')
 
 const stockSchema = new mongoose.Schema({
   symbol: String,
@@ -33,6 +34,35 @@ botSchema.methods.verifyPassword = function (password) {
       resolve(valid)
     })
   })
+}
+
+botSchema.methods.adjustCash = function(amount) {
+  this.cash += amount
+  this.save()
+}
+
+botSchema.methods.addStock = function (symbol, quantity) {
+  // See if this bot already owns the requested stock
+  const index = this.stocks.findIndex(stock => {
+    return stock.symbol == symbol
+  })
+
+  // Create new stock
+  if (index == -1) {
+    yahooFinance.getStockInfo(symbol, stockInfo => {
+      this.stocks.push(
+        {
+          symbol: symbol,
+          name: stockInfo.name,
+          quantity: quantity
+        }
+      )
+      this.save()
+    })
+  } else { // Update existing stock
+    this.stocks[index].quantity += quantity
+    this.save()
+  }
 }
 
 // Hashing Password

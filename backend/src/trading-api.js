@@ -4,6 +4,7 @@ const config = require('../config')
 const blackrockController = require('./controllers/trading/blackrock')
 const newsController = require('./controllers/trading/news')
 const stockQuoteController = require('./controllers/trading/stockquote')
+const buyController = require('./controllers/trading/buy')
 
 const tradingApi = {
   start: function () {
@@ -15,6 +16,8 @@ const tradingApi = {
       app.get('/trading_api/news', newsController)
 
       app.get('/trading_api/stockquote/:symbol', stockQuoteController)
+
+      app.get('/trading_api/buy', buyController)
 
       app.listen(config.tradingApiPort, () => {
         resolve()
