@@ -128,13 +128,15 @@ GET https://botmansachs.com/trading_api/sell?symbol=AAPL&quantity=20
 ```
 
 ## PATCH /persist
+
 Store data persistently.
 
 Parameters:
 
 | Name         | Type   | Description                                                   |
 |--------------|--------|---------------------------------------------------------------|
-| bot_name     | string | Name of bot to buy for                                        |
+| bot_name     | string | Name of bot to store data for                                 |
+| data         | string | Data to store                                                 |
 
 Example request:
 
@@ -150,8 +152,22 @@ Parameters:
 |--------------|--------|---------------------------------------------------------------|
 | bot_name     | string | Name of bot to buy for                                        |
 
+Response:
+
+| Name         | Type   | Description                                                   |
+|--------------|--------|---------------------------------------------------------------|
+| data         | string | Stored persist data                                           |
+
 Example request:
 
 ```
 GET https://botmansachs.com/trading_api/persist
+```
+
+Example response:
+
+```
+{
+  "data": "(lp0\nI1\naI2\naI3\na."
+}
 ```
