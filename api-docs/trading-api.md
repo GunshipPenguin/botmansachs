@@ -1,6 +1,7 @@
 # Botman Sachs Trading API
 
-- Tiny wrapper around the Blackrock and NewsAPI.org APIs
+- Wrapper around the Blackrock and Yahoo Finance APIs
+-
 - Actual calls to the HTTP API are made from the Botman Sachs Python module which bots must import
 
 ## Summary
@@ -12,7 +13,7 @@
 | GET    | /buy         | Buy a stock/security                                  |
 | GET    | /sell        | Sell a stock/security                                 |
 | PATCH  | /persist     | Store data persistently                               |
-| GET    | /persist     | Get persistentely stored data                         |
+| GET    | /persist     | Get persistently stored data                         |
 
 ## GET /blackrock
 Query the Blackrock Aladdin API for financial information
@@ -91,6 +92,27 @@ Example response:
       "publishedAt": "2017-09-09T08:00:26Z"
     }
   ]
+```
+
+## GET /stockquote/{stock}
+Fetch the current price of a stock by symbol in USD.
+
+Parameters:
+
+| Name         | Type   | Description                                                                                     |
+|--------------|--------|-------------------------------------------------------------------------------------------------|
+| symbol       | string | Term to search for news from                                                                    |
+
+Example Request:
+```
+GET https://botmansachs.com/trading_api/stockquote/aapl
+```
+
+Example Response:
+```
+{
+  "price": 993.23
+}
 ```
 
 ## GET /buy
