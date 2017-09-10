@@ -30,31 +30,18 @@ const buyController = function (req, res) {
 
     Bot.findOne({name: botName}, (err, bot) => {
       if (err) {
-        status(500).json({error: 'Internal server error while storing data'})
+        res.status(500).json({error: 'Internal server error while storing data'})
         return
       }
 
       if (bot.cash >= totalCost) {
         bot.addStock(symbol, quantity)
         bot.adjustCash(-totalCost)
-        res.status(200).send()
+        res.status(204).send()
       } else {
         res.status(400).json({error: 'Insufficent funds'})
       }
     })
-  })
-}
-
-function getStockPrice(symbol, cb) {
-  let url = 'http://finance.yahoo.com/d/quotes.csv?f=a&s=' + req.params.symbol
-
-  request(url, function (err, response, body) {
-    if (err) {
-      console.error("internal error while fetching stock price info from yahoo")
-      return
-    }
-
-    cb(parseFloat(body, 10))
   })
 }
 

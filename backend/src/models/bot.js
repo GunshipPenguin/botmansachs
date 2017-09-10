@@ -49,7 +49,7 @@ botSchema.methods.addStock = function (symbol, quantity) {
 
   // Create new stock
   if (index == -1) {
-    yahooFinance.getStockInfo(symbol, stockInfo => {
+    yahooFinance.getStockInfo(symbol, (err, stockInfo) => {
       this.stocks.push(
         {
           symbol: symbol,
@@ -62,6 +62,27 @@ botSchema.methods.addStock = function (symbol, quantity) {
   } else { // Update existing stock
     this.stocks[index].quantity += quantity
     this.save()
+  }
+}
+
+botSchema.methods.getStock = function (symbol) {
+  const index = this.stocks.findIndex(stock => {
+    return stock.symbol == symbol
+  })
+
+  return index == -1 ? null : this.stocks[index]
+}
+
+botSchema.methods.removeStock = function (symbol, quantity) {
+  const index = this.stocks.findIndex(stock => {
+    return stock.symbol == symbol
+  })
+
+  if (index != -1) {
+    this.stocks[index].quantity -= quantity
+    if (this.stocks[index].quantity == 0) {
+      this.stocks.splice(index, 1)
+    }
   }
 }
 
