@@ -3,14 +3,13 @@ import requests
 from urllib.parse import quote, urlencode
 
 __bot_name = False
-def register_bot(x):
+def register_bot(bot_name):
   '''(str) -> None
   Register the bot so that it can be identified by the server.
   Should only be called once. Any subsequent calls have no effect.
   '''
   global __bot_name
-  if (__bot_name == False):
-    __bot_name = x
+  __bot_name = x
 
 
 def query_blackrock_api(api_name, query):
@@ -26,4 +25,3 @@ def query_blackrock_api(api_name, query):
 def query_news_api(search_term):
     r = requests.get("http://api:8081/news?bot=" + __bot_name + "search_term=" +
         quote(search_term))
-
