@@ -83,9 +83,9 @@ const frontendApi = {
 
       app.get('/frontend_api/season', seasonController)
 
-      app.patch('/frontend_api/mybot', verifySessionMiddleware, patchMyBotController)
+      app.patch('/frontend_api/mybot/:user', verifySessionMiddleware, patchMyBotController)
 
-      app.get('/frontend_api/mybot', verifySessionMiddleware, getMyBotController)
+      app.get('/frontend_api/mybot/:user', verifySessionMiddleware, getMyBotController)
 
       app.post('/frontend_api/login', loginController)
 

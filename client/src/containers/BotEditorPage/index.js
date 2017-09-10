@@ -24,7 +24,7 @@ class BotEditorPage extends Component {
     }
 
     // Promise.resolve({ source: '' })
-    fetch('http://localhost:8081/frontend_api/mybot')
+    fetch(`http://localhost:8081/frontend_api/mybot/${username}`)
       .then((res) => res.json())
       .then((bot) => {
         const source = bot.source ||
@@ -77,13 +77,16 @@ class BotEditorPage extends Component {
     if (event) {
       event.preventDefault()
     }
-
+    const {
+      username,
+    } = this.props;
     const {
       source,
     } = this.state;
+    console.log(source)
 
     // Promise.resolve({})
-    fetch('http://localhost:8081/frontend_api/mybot', {
+    fetch(`http://localhost:8081/frontend_api/mybot/${username}`, {
       method: 'PATCH',
       body: JSON.stringify({
         source,
@@ -103,13 +106,14 @@ class BotEditorPage extends Component {
 
     const {
       history,
+      username,
     } = this.props
     const {
       source,
     } = this.state;
 
     // Promise.resolve({})
-    fetch('http://localhost:8081/frontend_api/mybot', {
+    fetch(`http://localhost:8081/frontend_api/mybot/${username}`, {
       method: 'PATCH',
       body: JSON.stringify({
         source,
@@ -123,7 +127,7 @@ class BotEditorPage extends Component {
   }
 
   render ({}, {
-    code,
+    source,
     lastSaved,
   }) {
     const styleButton = {
@@ -140,13 +144,13 @@ class BotEditorPage extends Component {
       <form onSubmit={this.handleRun}>
         <CodeMirror
           ref={(el) => this.editor = el}
-          value={code}
-          onChange={(code) => console.log(code) || this.setState({ code })}
+          value={source}
+          onChange={(source) => this.setState({ source })}
           options={{
             mode: 'python',
             keyMap: 'sublime',
             lineNumbers: true,
-            readOnly: code === null,
+            readOnly: source === null,
           }}
           height="600"
         />

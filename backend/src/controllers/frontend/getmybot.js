@@ -2,14 +2,14 @@
 const Bot = require('../../models/bot')
 
 function getMyBotController(req, res) {
-  const username = req.session.user.name
+  const username = req.params.user
 
-  Bot.updateOne({name: username}, {source: req.body.source}, (err, bot) => {
+  Bot.findOne({name: username}, (err, bot) => {
     if (err) {
-      res.status(500).json({error: 'internal server error'})
+      res.status(500).json({error: 'Internal server error'})
       return;
     }
-    res.status(200).send(bot.source);
+    res.status(200).json({ source: bot.source });
   })
 }
 
