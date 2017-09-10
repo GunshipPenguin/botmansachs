@@ -22,8 +22,7 @@ const botSchema = new mongoose.Schema({
   cash: { type: Number, default: 1000000 },
   stocks: { type: [stockSchema], default: [] },
   history: { type: [historySchema], default: [] },
-  persist: { type: String, default: '' },
-  currStockPrices: { type: Object, default: {} }
+  persist: { type: String, default: '' }
 })
 
 botSchema.methods.verifyPassword = function (password) {
@@ -72,10 +71,6 @@ botSchema.methods.getStock = function (symbol) {
   })
 
   return index == -1 ? null : this.stocks[index]
-}
-
-botSchema.methods.updateStockPrice = function (symbol, newPrice) {
-  this.currStockPrices[symbol] = newPrice
 }
 
 botSchema.methods.removeStock = function (symbol, quantity) {
