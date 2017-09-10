@@ -33,6 +33,12 @@ const yahooFinance = {
         console.error('Internal server error while fetching stock quote')
         return
       }
+      body = body.trim()
+
+      if (!body) {
+        cb([])
+        return
+      }
       // split on each stock
       const stockSplit = body.split('\n')
       stockSplit.splice(-1, 1)
@@ -40,7 +46,6 @@ const yahooFinance = {
       const priceMap = {
         // of form symbol: price
       }
-
       stockSplit.forEach(csv => {
         const csvSplit = csv.split(',')
         const price = parseFloat(csvSplit[0])
