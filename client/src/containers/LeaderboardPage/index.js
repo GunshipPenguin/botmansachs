@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import { Link } from 'react-router-dom'
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -45,7 +46,10 @@ class LeaderboardPage extends Component {
     fetch(`http://localhost:8081/frontend_api/bots?after=0&limit=200${searchQuery}`)
       .then((res) => res.json())
       .then(({ bots }) => {
-        this.setState({ bots })
+        this.setState({ bots: bots.map(x => ({
+          ...x,
+          holdings: Math.round(x.holdings),
+        })) })
       })
       .catch(console.error)
   }
@@ -125,24 +129,9 @@ class LeaderboardPage extends Component {
                   borderBottom: '1px solid white'
                 }}
               >
-                <span
-                  style={{
-                    color: bot.rank === 1
-                      ? '#e6c200'
-                      : bot.rank === 2
-                        ? '#b3b3b3'
-                        : bot.rank === 3
-                          ? '#cd7f32'
-                          : undefined,
-                    fontWeight: 'bold'
-                  }}
-                >
-                  {bot.rank !== Number.MAX_SAFE_INTEGER ? numberWithCommas(bot.rank) + '.' : '∅'}
-                </span>
-                &nbsp;
-                <span>
+                <Link to={`/leaderboard/${bot.name}`}>
                   {bot.name}
-                </span>
+                </Link>
                 &nbsp;
                 <span
                   style={{

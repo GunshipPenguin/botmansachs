@@ -81,7 +81,11 @@ class UserPage extends Component {
     fetch(`http://localhost:8081/frontend_api/bots/${username}`)
       .then((res) => res.json())
       .then((user) => {
-        this.setState({ user })
+        this.setState({ user: {
+          ...user,
+          cash: Math.round(user.cash),
+          history: user.history.map(x => ({...x,holdings:Math.round(x.holdings)}))
+        } })
       })
       .catch(console.error)
   }
@@ -142,30 +146,6 @@ class UserPage extends Component {
             </div>
             <div>
               Stocks <span style={{ color: '#99c12a' }}>{numberWithCommas(holdings - user.cash)} $</span>
-            </div>
-          </div>
-
-          <div
-            style={{
-              flexGrow: 1,
-              textAlign: 'center'
-            }}
-          >
-            <h2>Rank</h2>
-            <div
-              style={{
-                width: 144,
-                height: 144,
-                border: '4px solid #99c12a',
-                borderRadius: '50%',
-                color: '#99c12a',
-                margin: '4px auto',
-                fontWeight: 'bold',
-                fontSize: '24px',
-                lineHeight: 5.8,
-              }}
-            >
-              {user.rank !== Number.MAX_SAFE_INTEGER ? numberWithCommas(user.rank) : '∅'}
             </div>
           </div>
         </div>
