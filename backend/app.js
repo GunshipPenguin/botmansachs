@@ -3,6 +3,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const tradingApi = require('./src/trading-api')
 const frontendApi = require('./src/frontend-api')
+const tickDispatcher = require('./src/tick-dispatcher')
 const mongoose = require('mongoose')
 const config = require('./config')
 
