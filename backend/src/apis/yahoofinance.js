@@ -38,13 +38,11 @@ const yahooFinance = {
       if (stockSplit[-1] == '') {
         stockSplit.pop()
       }
-      console.log(stockSplit)
       stockSplit.splice(-1, 1)
 
       const priceMap = {
         // of form symbol: price
       }
-      console.log(stockSplit)
       stockSplit.forEach(csv => {
         const csvSplit = csv.split(',')
         const price = parseFloat(csvSplit[0])

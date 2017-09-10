@@ -2,8 +2,8 @@
 const amqp = require('amqplib/callback_api');
 const Bot = require('./models/bot');
 
-const tickInterval = 10 * 1000
-const historyInterval = 60 * 1000
+const thinkTickInterval = 10 * 1000
+const historyTickInterval = 60 * 1000
 let nextHistoryTick = Date.now()
 amqp.connect('amqp://rabbitmq', function(err, conn) {
   conn.createChannel(function(err, ch) {
@@ -13,17 +13,18 @@ amqp.connect('amqp://rabbitmq', function(err, conn) {
     
     function tick() {
       const tickStart = Date.now()
+      console.log('Think Tick')
       const shouldUpdateHistory = nextHistoryTick <= Date.now()
       if (shouldUpdateHistory) {
-        nextHistoryTick = Date.now + historyInterval
+        console.log('History Tick')
+        nextHistoryTick = Date.now + historyTickInterval
       }
-      console.log('Tick ' + tickStart)
       Bot.find()
         .then(bots => bots.forEach((bot) => {
           if (shouldUpdateHistory) {
             const holdings = Math.round(bot.cash + bot.stocks
               .reduce((result, stock) => result + stock.quantity * stock.price, 0))
-            bot.updateHistory(tickStart, holdings)
+            bot.addHistory(tickStart, holdings)
           }
           console.log('Enqueue ' + bot.name + ' script')
           ch.sendToQueue(
@@ -40,6 +41,6 @@ amqp.connect('amqp://rabbitmq', function(err, conn) {
     }
 
     console.log('Tick dispatcher started')
-    setInterval(tick, tickInterval)
+    setInterval(tick, thinkTickInterval)
   });
 });

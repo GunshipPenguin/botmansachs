@@ -2,6 +2,10 @@ import { h, Component } from 'preact'
 import { Link } from 'react-router-dom'
 
 function numberWithCommas(x) {
+  if (!x) {
+    return 0
+  }
+  x = Math.round(x)
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 

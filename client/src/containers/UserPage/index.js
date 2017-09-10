@@ -7,6 +7,7 @@ function numberWithCommas(x) {
   if (!x) {
     return 0
   }
+  x = Math.round(x)
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
@@ -97,8 +98,8 @@ class UserPage extends Component {
       return
     }
     // cash + total value of stocks
-    const holdings = user.cash + user.stocks
-      .reduce((result, stock) => result + stock.quantity * stock.price, 0)
+    const holdings = Math.round(user.cash + user.stocks
+      .reduce((result, stock) => result + stock.quantity * stock.price, 0))
     const styleButton = {
       backgroundColor: 'transparent',
       display: 'inline-block',
@@ -140,13 +141,13 @@ class UserPage extends Component {
                 lineHeight: 5.8,
               }}
             >
-              {numberWithCommas(holdings)} $
+              {numberWithCommas(Math.round(holdings))} $
             </div>
             <div>
-              Cash <span style={{ color: '#99c12a' }}>{numberWithCommas(user.cash)} $</span>
+              Cash <span style={{ color: '#99c12a' }}>{numberWithCommas(Math.round(user.cash))} $</span>
             </div>
             <div>
-              Stocks <span style={{ color: '#99c12a' }}>{numberWithCommas(holdings - user.cash)} $</span>
+              Stocks <span style={{ color: '#99c12a' }}>{numberWithCommas(Math.round(holdings - user.cash))} $</span>
             </div>
           </div>
         </div>
@@ -240,16 +241,16 @@ class UserPage extends Component {
                         fontWeight: 'bold'
                       }}
                     >
-                      {numberWithCommas(stock.shares)} shares
+                      {numberWithCommas(stock.quantity)} shares
                     </span>
                     &nbsp;
-                    {stock.value && <span
+                    {stock.price && <span
                       style={{
                         color: '#99c12a',
                         fontWeight: 'bold'
                       }}
                     >
-                      {numberWithCommas(stock.value)} $
+                      {numberWithCommas(stock.price)} $ each
                     </span>}
                   </div>
                 ))}
@@ -261,7 +262,7 @@ class UserPage extends Component {
                 {user.history.length <= 3 && <p style={{ padding: '0 15px' }}>
                   No history.
                 </p>}
-                <Line
+                {user.history.length > 3 && <Line
                   data={{
                     labels: user.history.map((x) =>
                       new Date(x.timestamp)
@@ -298,7 +299,7 @@ class UserPage extends Component {
                       }]
                     }
                   }}
-                />
+                />}
               </div>
             )}
           </div>

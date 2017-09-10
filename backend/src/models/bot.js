@@ -83,6 +83,7 @@ botSchema.methods.removeStock = function (symbol, quantity) {
     if (this.stocks[index].quantity == 0) {
       this.stocks.splice(index, 1)
     }
+    this.save()
   }
 }
 
@@ -91,6 +92,7 @@ botSchema.methods.addHistory = function (timestamp, holdings) {
     timestamp,
     holdings,
   })
+  console.log(this.history)
   this.save()
 }
 
