@@ -5,15 +5,15 @@ const yahooFinance = require('../../apis/yahoofinance')
 
 const buyController = function (req, res) {
   if (!req.query.bot_name) {
-    status(400).json({error: 'bot name must be specified'})
+    req.status(400).json({error: 'bot name must be specified'})
     return
   }
   if (!req.query.symbol) {
-    status(400).json({error: 'no stock symbol provided'})
+    req.status(400).json({error: 'no stock symbol provided'})
     return
   }
   if (!req.query.quantity || isNaN(parseInt(req.query.quantity))) {
-    status(400).json({error: 'no quantity specified or quantity invalid'})
+    req.status(400).json({error: 'no quantity specified or quantity invalid'})
   }
   const botName = req.query.bot_name
   const symbol = req.query.symbol
