@@ -1,5 +1,7 @@
 'use strict'
 const Bot = require('../../models/bot')
+const flatMap = require('lodash.flatmap')
+const yahooFinance = require('../../apis/yahoofinance')
 
 function botsController(req, res) {
   let after
@@ -31,8 +33,18 @@ function botsController(req, res) {
      res.status(500).send('Internal error while retreiving bot information')
      return
    } else {
-     const resData = {bots: bots}
-     res.json(resData)
+     let stockSymbols = flatMap(bots, bot => {
+       return bot.stocks.map(stock => stock.symbol)
+     })
+     yahooFinance.getMultiStockPrice(stockSymbols, priceMap => {
+       const newBots = bots.map(bot => {
+         const newStocks = bot.stocks.map(stock => {
+           return Object.assign(stock.toObject(), {price: priceMap[stock.symbol]})
+         })
+         return Object.assign(bot.toObject(), {stocks: newStocks})
+       })
+       res.status(200).json({bots: newBots})
+     })
    }
  }).sort(sortParams).limit(limit).select({_id: 0, __v: 0, password: 0, source: 0, persist: 0})
 }

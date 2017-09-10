@@ -24,6 +24,35 @@ const yahooFinance = {
         })
       }
     })
+  },
+
+  getMultiStockPrice: function(symbols, cb) {
+    const url = 'http://finance.yahoo.com/d/quotes.csv?f=as&s=' + symbols.reduce((result, x) => result + ',' + x, '')
+    request(url, function (err, response, body) {
+      if (err) {
+        console.error('Internal server error while fetching stock quote')
+        return
+      }
+      // split on each stock
+      const stockSplit = body.split('\n')
+      stockSplit.splice(-1, 1)
+
+      const priceMap = {
+        // of form symbol: price
+      }
+
+      stockSplit.forEach(csv => {
+        const csvSplit = csv.split(',')
+        const price = parseFloat(csvSplit[0])
+        const symbol = csvSplit[1].slice(1, -1)
+
+        if (symbol !== 'N/A') {
+          priceMap[symbol] = price
+        }
+      })
+
+      cb(priceMap)
+    })
   }
 }
 
