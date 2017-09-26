@@ -1,3 +1,5 @@
 # Botman Sachs
 
-[botmansachs.com](https://botmansachs.com)
+[Read the DevPost](https://devpost.com/software/botman-sachs)
+
+Winner of best FinTech prize at PennApps! 🏆
